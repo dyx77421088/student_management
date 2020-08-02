@@ -1,13 +1,14 @@
 
 import 'package:dio/dio.dart';
+import 'package:student_management/ui/shared/toast/toast.dart';
 import 'config.dart';
 
-class HttpRequest {
+class DYXHttpRequest {
   static final BaseOptions baseOptions = BaseOptions(baseUrl: HttpConfig.baseURL, connectTimeout: HttpConfig.timeout);
   final Dio dio = Dio(baseOptions);
 
 
-  Future<T> request<T>(String url, {data, String method = "get", Map<String, dynamic> params, Interceptor inter}) async{
+  Future<T> request<T>(String url, {data, String method = "get", Map<String, dynamic> params, Interceptor inter, Map<String, dynamic> headers}) async{
     print('url=$url');
 
     // 创建单独配置
@@ -33,6 +34,11 @@ class HttpRequest {
       onError: (error) {
         print('错误拦截');
         print(error.response.data);
+        final message = error.response.data['message'];
+        print(message);
+        if (message != null) {
+          DYXToast.showToast(message);
+        }
         return error;
       }
     );
@@ -49,6 +55,9 @@ class HttpRequest {
 
     // 发送网络请求
     try {
+      // 添加响应头
+      if (headers != null)
+        dio.options.headers = headers;
       Response response = await dio.request(url, queryParameters: params, options: options, data: data);
       return response.data;
     } on DioError catch(e) {

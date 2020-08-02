@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'home_content.dart';
 
@@ -16,7 +17,9 @@ class _DYXHomePageState extends State<DYXHomePage> {
       appBar: AppBar(
         title: Text('首页'),
         leading: IconButton(
-          icon: Icon(Icons.build),
+          icon: CircleAvatar(
+            backgroundImage: AssetImage("assets/images/xzdl.png"),
+          ),
           onPressed: () {
             Scaffold.of(context).openDrawer();
           },

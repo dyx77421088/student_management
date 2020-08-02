@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:student_management/ui/shared/theme/my_colors.dart';
+import 'package:student_management/core/extension/int_extension.dart';
 
 class DYXAppTheme {
   // 公有属性
-  static const double bodyText1Size = 18;
-  static const double bodyText2Size = 14;
+  static double bodyText1Size = 10.px;
+  static double bodyText2Size = 12.px;
 
-  //
-  static const double subTitle1Size = 24;
-  static const double subTitle2Size = 16;
+  // 影响在输入框中的table提示信息
+  static double subTitle1Size = 16.px;
+  static double subTitle2Size = 8.px;
 
-  static const double headline1Size = 72;
-  static const double headline2Size = 64;
-  static const double headline3Size = 56;
-  static const double headline4Size = 48;
-  static const double headline5Size = 40;
-  static const double headline6Size = 32;
+  static double headline1Size = 72.px;
+  static double headline2Size = 64.px;
+  static double headline3Size = 56.px;
+  static double headline4Size = 48.px;
+  static double headline5Size = 40.px;
+  static double headline6Size = 32.px;
+
+
 
   // 普通模式
   static final Color norTextColors = Colors.black87;
   static final Color subTitle1Color = Colors.black;
 
   static final ThemeData norTheme = ThemeData(
-    primarySwatch: Colors.pink,
-    canvasColor: Color.fromRGBO(255, 224, 222, 1),
-    accentColor: Colors.orange,
+    primarySwatch: DYXColors.blue,
+//    canvasColor: Color.fromRGBO(255, 224, 222, 1),
+    canvasColor: DYXColors.blue[50],
     textTheme: TextTheme(
       bodyText1: TextStyle(fontSize: bodyText1Size, color: norTextColors),
       bodyText2: TextStyle(fontSize: bodyText2Size, color: norTextColors),
@@ -33,7 +37,11 @@ class DYXAppTheme {
       headline3: TextStyle(fontSize: headline3Size, color: Colors.black54),
       headline4: TextStyle(fontSize: headline4Size, color: Colors.black54),
       headline5: TextStyle(fontSize: headline5Size, color: Colors.black54),
-    )
+    ),
+    buttonTheme: ButtonThemeData(
+      splashColor: Colors.grey,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.px))),
+    ),
   );
 
   // 暗黑模式
