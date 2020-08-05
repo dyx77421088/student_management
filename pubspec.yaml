@@ -42,6 +42,15 @@ dependencies:
   share: ^0.6.4+3
 # 共享
   shared_preferences: ^0.5.8
+#  图片处理
+  flutter_blurhash: ^0.5.0
+  cached_network_image: ^2.2.0+1
+#  flare动画
+  flare_flutter: ^2.0.5
+#  google bar
+  google_nav_bar: ^2.2.0
+#  icons
+  line_icons: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +70,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/flr/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

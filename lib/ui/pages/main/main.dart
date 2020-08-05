@@ -1,5 +1,7 @@
 import 'package:student_management/ui/pages/main/main_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:student_management/ui/shared/nav_bar/nav_bar.dart';
+import 'package:student_management/ui/shared/theme/my_colors.dart';
 import 'initialize_items.dart';
 
 class DYXMainPage extends StatefulWidget {
@@ -19,14 +21,17 @@ class _DYXMainScreenState extends State<DYXMainPage> {
         index: _index,
         children: pages,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: items,
-        currentIndex: _index,
-        onTap: (index) {
-          setState(() {
-            _index = index;
-          });
-        },
+      bottomNavigationBar: Container(
+        color: DYXColors.blue[100],
+        child: DYXNavBar(
+          tabs: items,
+          selectedIndex: _index,
+          onTabChange: (index) {
+            setState(() {
+              _index = index;
+            });
+          },
+        ),
       ),
       drawer: DYXMainDrawer(),
     );

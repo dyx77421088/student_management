@@ -18,6 +18,8 @@ class DYXAppTheme {
   static double headline5Size = 40.px;
   static double headline6Size = 32.px;
 
+  static double appbarSize = 16.px;
+
 
 
   // 普通模式
@@ -26,6 +28,7 @@ class DYXAppTheme {
 
   static final ThemeData norTheme = ThemeData(
     primarySwatch: DYXColors.blue,
+    highlightColor: DYXColors.blue[700],
 //    canvasColor: Color.fromRGBO(255, 224, 222, 1),
     canvasColor: DYXColors.blue[50],
     textTheme: TextTheme(
@@ -37,6 +40,9 @@ class DYXAppTheme {
       headline3: TextStyle(fontSize: headline3Size, color: Colors.black54),
       headline4: TextStyle(fontSize: headline4Size, color: Colors.black54),
       headline5: TextStyle(fontSize: headline5Size, color: Colors.black54),
+    ),
+    appBarTheme: AppBarTheme(
+      color: DYXColors.blue[300],
     ),
     buttonTheme: ButtonThemeData(
       splashColor: Colors.grey,

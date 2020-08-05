@@ -15,7 +15,6 @@ class DYXUserViewModel extends ChangeNotifier {
       print("是否为空${prefs == null}");
       if(prefs.getBool("isLogin") == null) {
         logOut();
-        notifyListeners();
         return;
       }
       print("进来了");
@@ -25,7 +24,6 @@ class DYXUserViewModel extends ChangeNotifier {
         // 发送请求
         DYXUserRequest.onToken(prefs.getString("token")).then((value) => _saveInfo(value));
       }
-      notifyListeners();
     });
   }
 
@@ -54,11 +52,22 @@ class DYXUserViewModel extends ChangeNotifier {
     prefs.setInt("id", data.id);
     prefs.setBool("isLogin", true);
 
+
+    // 用户详细信息
+    if(user.userDetails != null) {
+      var userDetails = user.userDetails.data;
+      prefs.setString("name", userDetails.name);
+      prefs.setString("avatar", userDetails.avatar);
+      prefs.setString("sex", userDetails.strSex);
+      prefs.setString("birthday", userDetails.birthday);
+      prefs.setString("personalSignature", userDetails.personalSignature);
+    }
+
+
     print("用户名:${user.data.userName}");
     print("用户名:${user.data.name}");
     print("用户名:${user.data.phoneNumber}");
     print("用户名:${user.data.school}");
-
     notifyListeners();
   }
 
@@ -72,7 +81,14 @@ class DYXUserViewModel extends ChangeNotifier {
     prefs.remove("role");
     prefs.remove("role");
     prefs.remove("id");
+
+    prefs.remove("avatar");
+    prefs.remove("sex");
+    prefs.remove("birthday");
+    prefs.remove("personalSignature");
+
     prefs.setBool("isLogin", false);
+    notifyListeners();
   }
 
   // 获得信息
@@ -90,6 +106,17 @@ class DYXUserViewModel extends ChangeNotifier {
   int get role => isLogin ? prefs.getInt("role") : null;
   /// 用户id
   int get id => isLogin ? prefs.getInt("id") : null;
+
+  // 用户详细信息
+  /// 头像
+  String get avatar => isLogin ? prefs.getString("avatar") : null;
+  /// 性别
+  String get sex => isLogin ? prefs.getString("sex") : null;
+  /// 生日
+  String get birthday => isLogin ? prefs.getString("birthday") : null;
+  /// 个性签名
+  String get personalSignature => isLogin ? prefs.getString("personalSignature") : null;
+
   /// 是否登录
   bool get isLogin => prefs == null ? false : prefs.getBool("isLogin");
 }

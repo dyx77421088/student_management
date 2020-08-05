@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:student_management/core/model/user_details/user_details_model.dart';
 import 'package:student_management/core/services/http_request.dart';
 import 'package:student_management/core/model/user/user_model.dart';
 import 'package:student_management/ui/shared/toast/toast.dart';
@@ -14,6 +15,15 @@ class DYXUserRequest {
 
     DYXUserModel userInfo = DYXUserModel.fromJson(user);
 
+    // 获得用户详情
+    final userDetails = await DYXHttpRequest().request(
+      "/userDetails/getUserDetailsByToken",
+      headers: {"token": userInfo.data.token},
+      method: "get",
+    );
+    // 设置用户详情
+    userInfo.userDetails = DYXUserDetailsModel.fromJson(userDetails);
+
     return userInfo;
   }
 
@@ -27,6 +37,15 @@ class DYXUserRequest {
 
     DYXUserModel userInfo = DYXUserModel.fromJson(user);
 
+    // 获得用户详情
+    final userDetails = await DYXHttpRequest().request(
+      "/userDetails/getUserDetailsByToken",
+      headers: {"token": userInfo.data.token},
+      method: "get",
+    );
+    // 设置用户详情
+    userInfo.userDetails = DYXUserDetailsModel.fromJson(userDetails);
+
     return userInfo;
   }
 
@@ -39,6 +58,15 @@ class DYXUserRequest {
     );
 
     DYXUserModel userInfo = DYXUserModel.fromJson(user);
+
+    // 获得用户详情
+    final userDetails = await DYXHttpRequest().request(
+      "/userDetails/getUserDetailsByToken",
+      headers: {"token": token},
+      method: "get",
+    );
+    // 设置用户详情
+    userInfo.userDetails = DYXUserDetailsModel.fromJson(userDetails);
 
     return userInfo;
   }

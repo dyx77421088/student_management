@@ -1,9 +1,26 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:student_management/ui/shared/animation/flare_status.dart';
 
 class DYXHomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('首页');
+    return Column(
+      children: <Widget>[
+        buildFlare(),
+      ],
+    );
+  }
+
+  Widget buildFlare() {
+    return Container(
+      height: 180,
+      child: FlareActor("assets/flr/Guss.flr",
+          alignment:Alignment.center,
+          fit:BoxFit.contain,
+          animation:DYXGuss.idle
+      ),
+    );
   }
 }

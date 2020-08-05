@@ -32,6 +32,9 @@ class DYXTextFormField extends StatefulWidget {
   // 验证信息
   final MyValidator validator;
 
+  // 焦点
+  final FocusNode focusNode;
+
   DYXTextFormField(
       {this.leftIcon,
       this.maxLength = 20,
@@ -41,7 +44,8 @@ class DYXTextFormField extends StatefulWidget {
       this.hintText,
       this.isPassword = false,
       this.suffixIcon,
-      this.validator
+      this.validator,
+      this.focusNode
       });
 
   @override
@@ -81,6 +85,7 @@ class _MyTextFormFieldState extends State<DYXTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      focusNode: widget.focusNode,
       controller: widget.controller,
       maxLength: widget.maxLength,
       //设置是否为密码输入
@@ -97,6 +102,7 @@ class _MyTextFormFieldState extends State<DYXTextFormField> {
           });
         }
       },
+//      focusNode: ,
     );
   }
 
@@ -107,7 +113,6 @@ class _MyTextFormFieldState extends State<DYXTextFormField> {
       prefixIcon: widget.leftIcon ?? Icon(DYXIcons.account),
       suffixIcon: widget.suffixIcon ?? buildSuffixIcon(),
       labelText: widget.labelText,
-
     );
   }
 

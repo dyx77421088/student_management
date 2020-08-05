@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:student_management/core/model/user_details/user_details_model.dart';
+
 DYXUserModel dyxUserModelFromJson(String str) => DYXUserModel.fromJson(json.decode(str));
 
 String dyxUserModelToJson(DYXUserModel data) => json.encode(data.toJson());
@@ -20,6 +22,8 @@ class DYXUserModel {
   Data data;
   int code;
   int status;
+//  用户详情
+  DYXUserDetailsModel userDetails;
 
   factory DYXUserModel.fromJson(Map<String, dynamic> json) => DYXUserModel(
     message: json["message"],
@@ -34,6 +38,8 @@ class DYXUserModel {
     "code": code,
     "status": status,
   };
+
+
 }
 
 class Data {

@@ -8,12 +8,9 @@ class DYXLoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: DYXLoginAppBar(context),
-        body: DYXLoginContent(),
-      ),
+    return Scaffold(
+      appBar: DYXLoginAppBar(context),
+      body: DYXLoginContent(),
     );
   }
 }

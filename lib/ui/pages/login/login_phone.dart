@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management/core/model/user/user_model.dart';
 import 'package:student_management/core/services/login/login_request.dart';
@@ -7,65 +9,78 @@ import 'package:student_management/core/utils/login_utils.dart';
 import 'package:student_management/core/viewmodel/count_down_view_model.dart';
 import 'package:student_management/core/viewmodel/user_view_model.dart';
 import 'package:student_management/ui/pages/login/login_register_forget.dart';
+import 'package:student_management/ui/shared/animation/flare_status.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
-import 'package:student_management/ui/shared/image_asset.dart';
+import 'package:student_management/ui/shared/nav_bar/nav_bar.dart';
+import 'file:///D:/flutterDemo/student_management/lib/ui/shared/image/image_asset.dart';
 import 'package:student_management/ui/shared/theme/my_colors.dart';
 import 'package:student_management/ui/shared/toast/toast.dart';
 import 'package:student_management/ui/widgets/my_text_form_field.dart';
-import 'package:student_management/core/extension/int_extension.dart';
 
-import 'package:flutter_icons/flutter_icons.dart';
+import 'login_content.dart';
 
 class DYXLoginPhone extends StatefulWidget {
+  final UpdateFlare flare;
+
+  DYXLoginPhone(this.flare);
+
   @override
   _DYXLoginUserState createState() => _DYXLoginUserState();
 }
 
-class _DYXLoginUserState extends State<DYXLoginPhone> {
+class _DYXLoginUserState extends State<DYXLoginPhone> with SingleTickerProviderStateMixin{
   //表单中的key
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   //手机号的控制器
   TextEditingController _phoneController = TextEditingController();
   //验证码的控制器
   TextEditingController _codeController = TextEditingController();
+  // 手机号的焦点
+  FocusNode phoneFocusNode;
+  @override
+  void initState() {
+    super.initState();
+    phoneFocusNode = FocusNode();
+    phoneFocusNode.addListener(() {
+      print('进来了!!!');
+      if(phoneFocusNode.hasFocus) {
+        widget.flare(DYXTeddy.idle);
+      } else {
+        widget.flare(DYXTeddy.test);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    phoneFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(20.px),
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            buildCard()
-          ],
-        ),
-      ),
-    );
+    return buildInfo();
   }
 
   /// 登录的详细信息
-  Widget buildCard() {
-    return Card(
-      child: Container(
-        padding: EdgeInsets.all(20.px),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              buildPhone(),
-              buildCode(),
-              buildButton(),
-              buildOther()
-            ],
-          ),
-        ),
+  Widget buildInfo() {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+          buildPhone(),
+          buildCode(),
+          buildButton()
+        ],
       ),
     );
   }
 
   /// 手机号
   Widget buildPhone() {
+
     return DYXTextFormField(
+      focusNode: phoneFocusNode,
       leftIcon: Icon(DYXIcons.phone),
       labelText: "手机号",
       controller: _phoneController,
@@ -106,6 +121,8 @@ class _DYXLoginUserState extends State<DYXLoginPhone> {
   void sendCode(DYXCountDownViewModel countVM){
     // 检测手机号是否和法
     if (!DYXLoginUtils.checkPhoneNumber(_phoneController.text)) {
+      // 小熊哭泣
+      widget.flare(DYXTeddy.fail);
       DYXToast.showToast("手机号不合法");
       return;
     }
@@ -115,6 +132,8 @@ class _DYXLoginUserState extends State<DYXLoginPhone> {
       if (countVM.canCountTime1) {
         countVM.startTimer1();
       }
+      // 小熊开心
+      widget.flare(DYXTeddy.success);
     });
   }
 
@@ -129,7 +148,9 @@ class _DYXLoginUserState extends State<DYXLoginPhone> {
             //先验证输入是否合法，合法执行后面的
             if(_formKey.currentState.validate()) {
               DYXUserRequest.onPhoneLogin(_phoneController.text, _codeController.text)
-                  .then((value) => saveUserInfo(value, userVM));
+                  .then((value) => saveUserInfo(value, userVM)).catchError((_){widget.flare(DYXTeddy.fail);});
+            } else { // 熊哭泣
+              widget.flare(DYXTeddy.fail);
             }
           },
           textColor: Colors.white,
@@ -146,15 +167,9 @@ class _DYXLoginUserState extends State<DYXLoginPhone> {
     print("用户名:${user.data.name}");
     print("用户名:${user.data.phoneNumber}");
     print("用户名:${user.data.school}");
+    widget.flare(DYXTeddy.success);
     Navigator.pop(context);
     DYXToast.showToast("登录成功");
     userVM.user = user;
-  }
-
-  Widget buildOther() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.px),
-      child: DYXLoginRegisterForget(),
-    );
   }
 }
