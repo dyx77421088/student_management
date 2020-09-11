@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:student_management/core/model/user/user_model.dart';
+import 'package:student_management/core/model/user/user_login_model.dart';
 import 'package:student_management/core/services/login/login_request.dart';
-import 'package:student_management/core/services/user/user_request.dart';
+import 'package:student_management/core/services/login/user_request.dart';
 import 'package:student_management/core/utils/login_utils.dart';
 import 'package:student_management/core/viewmodel/count_down_view_model.dart';
 import 'package:student_management/core/viewmodel/user_view_model.dart';
-import 'package:student_management/ui/pages/login/login_register_forget.dart';
 import 'package:student_management/ui/shared/animation/flare_status.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
-import 'package:student_management/ui/shared/nav_bar/nav_bar.dart';
-import 'file:///D:/flutterDemo/student_management/lib/ui/shared/image/image_asset.dart';
 import 'package:student_management/ui/shared/theme/my_colors.dart';
 import 'package:student_management/ui/shared/toast/toast.dart';
 import 'package:student_management/ui/widgets/my_text_form_field.dart';
@@ -148,7 +143,8 @@ class _DYXLoginUserState extends State<DYXLoginPhone> with SingleTickerProviderS
             //先验证输入是否合法，合法执行后面的
             if(_formKey.currentState.validate()) {
               DYXUserRequest.onPhoneLogin(_phoneController.text, _codeController.text)
-                  .then((value) => saveUserInfo(value, userVM)).catchError((_){widget.flare(DYXTeddy.fail);});
+                  .then((value) => saveUserInfo(value, userVM))
+                  .catchError((_){widget.flare(DYXTeddy.fail);});
             } else { // 熊哭泣
               widget.flare(DYXTeddy.fail);
             }
@@ -161,12 +157,12 @@ class _DYXLoginUserState extends State<DYXLoginPhone> with SingleTickerProviderS
   }
 
   /// 保存用户信息
-  void saveUserInfo(DYXUserModel user, DYXUserViewModel userVM) {
+  void saveUserInfo(DYXUserLoginModel user, DYXUserViewModel userVM) {
     if(user == null) return;
-    print("用户名:${user.data.userName}");
-    print("用户名:${user.data.name}");
-    print("用户名:${user.data.phoneNumber}");
-    print("用户名:${user.data.school}");
+//    print("用户名:${user.data.userName}");
+//    print("用户名:${user.data.name}");
+//    print("用户名:${user.data.phoneNumber}");
+//    print("用户名:${user.data.school}");
     widget.flare(DYXTeddy.success);
     Navigator.pop(context);
     DYXToast.showToast("登录成功");

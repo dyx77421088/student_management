@@ -6,13 +6,13 @@ class DYXLoginRegisterForget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        InkWell(
+        FlatButton(
           child: Text('现在注册'),
-          onTap: () {},
+          onPressed: null,
         ),
-        InkWell(
+        FlatButton(
           child: Text('忘记密码'),
-          onTap: () {},
+          onPressed: () {},
         ),
       ],
     );

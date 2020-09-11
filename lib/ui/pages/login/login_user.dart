@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:student_management/core/model/user/user_model.dart';
-import 'package:student_management/core/services/user/user_request.dart';
+import 'package:student_management/core/model/user/user_login_model.dart';
+import 'package:student_management/core/services/login/user_request.dart';
 import 'package:student_management/core/viewmodel/user_view_model.dart';
-import 'package:student_management/core/extension/int_extension.dart';
-import 'package:student_management/ui/pages/login/login_register_forget.dart';
-import 'package:student_management/ui/shared/animation/flare_animation.dart';
 import 'package:student_management/ui/shared/animation/flare_status.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
 import 'package:student_management/ui/shared/theme/my_colors.dart';
 import 'package:student_management/ui/shared/toast/toast.dart';
 import 'package:student_management/ui/widgets/my_text_form_field.dart';
-import 'package:student_management/core/extension/int_extension.dart';
-import 'package:flare_flutter/flare_actor.dart';
 
 import 'login_content.dart';
 
@@ -117,12 +112,12 @@ class _DYXLoginUserState extends State<DYXLoginUser> with SingleTickerProviderSt
   }
 
   /// 保存用户信息
-  void saveUserInfo(DYXUserModel user, DYXUserViewModel userVM) {
+  void saveUserInfo(DYXUserLoginModel user, DYXUserViewModel userVM) {
     if(user == null) return;
-    print("用户名:${user.data.userName}");
-    print("用户名:${user.data.name}");
-    print("用户名:${user.data.phoneNumber}");
-    print("用户名:${user.data.school}");
+//    print("用户名:${user.data.userName}");
+//    print("用户名:${user.data.name}");
+//    print("用户名:${user.data.phoneNumber}");
+//    print("用户名:${user.data.school}");
     widget.flare(DYXTeddy.success);
     Navigator.pop(context);
     DYXToast.showToast("登录成功");

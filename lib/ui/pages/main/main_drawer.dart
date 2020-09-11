@@ -5,6 +5,8 @@ import 'package:student_management/core/extension/int_extension.dart';
 import 'package:student_management/core/router/route_animation.dart';
 import 'package:student_management/core/viewmodel/user_view_model.dart';
 import 'package:student_management/ui/pages/login/login.dart';
+import 'package:student_management/ui/pages/personal/details/details.dart';
+import 'package:student_management/ui/shared/dialog/dialog.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
 import 'package:student_management/ui/shared/theme/my_colors.dart';
@@ -20,16 +22,40 @@ class DYXMainDrawer extends StatelessWidget {
           builder: (ctx, userVM, child) => ListView(
             children: <Widget>[
               buildHeaderView(context, userVM),
-              buildListTile(context, Icon(DYXIcons.logout), "注销",() {
-                userVM.logOut();
-                DYXToast.showToast("成功退出用户!");
-                Navigator.of(context).pop();
-              }),
+              buildExit(context, userVM),
             ],
           ),
         ),
       ),
     );
+  }
+
+  /// 退出
+  Widget buildExit(BuildContext context, DYXUserViewModel userVM) {
+    return buildListTile(context, Icon(DYXIcons.logout), "注销",() {
+      if(userVM.isLogin) {
+        DYXDialog.showDialog(
+          context: context,
+          title: "退出",
+          desc: "是否退出?",
+          btnOkOnPress: () {
+            userVM.logOut();
+            DYXToast.showToast("成功退出用户!");
+            Navigator.of(context).pop();
+          },
+          btnCancelOnPress: () {},
+        );
+      } else {
+        DYXDialog.showDialog(
+          context: context,
+          title: "请先登录",
+          btnOkOnPress: () {
+            Navigator.pushNamed(context, DYXLoginPage.routeName);
+          }
+        );
+      }
+
+    });
   }
 
   /// 头部
@@ -41,8 +67,11 @@ class DYXMainDrawer extends StatelessWidget {
       ),
       margin: EdgeInsets.only(bottom: 20.px),
       currentAccountPicture: buildAvatar(context),
-      accountName: Text(userVM.name != null ? userVM.name : "???"),
-      accountEmail: Text(userVM.school != null ? userVM.school : ""),
+      accountName: Text(userVM.name ?? "请先登录"),
+      accountEmail: Text(userVM.schoolName ?? ""),
+      otherAccountsPictures: <Widget>[
+        Text(userVM.className ?? "")
+      ],
     );
   }
 
@@ -70,7 +99,7 @@ class DYXMainDrawer extends StatelessWidget {
   /// 单击头像
   void checkAvatar(BuildContext context, DYXUserViewModel userVM) {
     if(userVM.isLogin) {
-      DYXToast.showToast("已经登陆了");
+      Navigator.pushNamed(context, DYXDetailsPage.routeName);
     } else {
       Navigator.pushNamed(context, DYXLoginPage.routeName);
     }

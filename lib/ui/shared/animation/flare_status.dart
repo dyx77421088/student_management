@@ -27,3 +27,15 @@ class DYXFlowBackground {
   static const flow = "Flow";
   static const shrink = "Shrink";
 }
+
+/// 背景图片
+class DYXBackgroundHomeIverusOld {
+  static const name = "background_home_iverus_old";
+  static const island01 = "island01";
+  static const island02 = "island02";
+  static const island03 = "island03";
+  static const island04 = "island04";
+  static const island05 = "island05";
+  static const island06 = "island06";
+
+}

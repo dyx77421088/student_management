@@ -38,7 +38,9 @@ class _DYXHomePageState extends State<DYXHomePage> {
       return DYXImageNetwork.avatarNetwork(url: userVM.avatar);
     }
     return CircleAvatar(
-      backgroundImage: AssetImage("assets/images/xzdl.png"),
+      backgroundImage: AssetImage(userVM.isLogin
+          ? "assets/images/avatar_unlogin.png"
+          : "assets/images/xzdl.png"),
       backgroundColor: Colors.white,
     );
   }

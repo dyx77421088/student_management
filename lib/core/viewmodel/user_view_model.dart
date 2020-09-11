@@ -1,12 +1,18 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:student_management/core/model/user/user_model.dart';
-import 'package:student_management/core/services/user/user_request.dart';
+import 'package:student_management/core/model/user/user_login_model.dart';
+import 'package:student_management/core/model/user/user_login_role_info.dart';
+import 'package:student_management/core/model/user/user_search_model.dart';
+import 'package:student_management/core/model/user/user_student_login_model.dart' as Student;
+import 'package:student_management/core/model/user/user_teacher_login_model.dart' as Teacher;
+import 'package:student_management/core/model/user/user_parent_login_model.dart' as Parent;
+import 'package:student_management/core/services/login/user_request.dart';
 /// 用户的一些信息的通知
 class DYXUserViewModel extends ChangeNotifier {
-  DYXUserModel _user;
+  DYXUserLoginModel _user;
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   SharedPreferences prefs;
 
@@ -22,7 +28,12 @@ class DYXUserViewModel extends ChangeNotifier {
       // 尝试登录
       if (prefs.getString("token") != null) {
         // 发送请求
-        DYXUserRequest.onToken(prefs.getString("token")).then((value) => _saveInfo(value));
+        DYXUserRequest.onToken(prefs.getString("token"), inter: InterceptorsWrapper(
+          onError: (err) {
+//            遇到错误，登出
+            logOut();
+          }
+        )).then((value) => _saveInfo(value));
       }
     });
   }
@@ -32,7 +43,7 @@ class DYXUserViewModel extends ChangeNotifier {
     return true;
   }
 
-  set user(DYXUserModel user) {
+  set user(DYXUserLoginModel user) {
     _user = user;
     // 保存信息
     _saveInfo(user);
@@ -40,53 +51,76 @@ class DYXUserViewModel extends ChangeNotifier {
   }
 
   /// 保存信息
-  void _saveInfo(DYXUserModel user) async{
-//    SharedPreferences prefs = await _prefs;
-    var data = user.data;
-    prefs.setString("name", data.name);
-    prefs.setString("userName", data.userName);
-    prefs.setString("school", data.school);
-    prefs.setString("phoneNumber", data.phoneNumber);
-    prefs.setString("token", data.token);
-    prefs.setInt("role", data.role);
-    prefs.setInt("id", data.id);
-    prefs.setBool("isLogin", true);
-
-
-    // 用户详细信息
-    if(user.userDetails != null) {
-      var userDetails = user.userDetails.data;
-      prefs.setString("name", userDetails.name);
-      prefs.setString("avatar", userDetails.avatar);
-      prefs.setString("sex", userDetails.strSex);
-      prefs.setString("birthday", userDetails.birthday);
-      prefs.setString("personalSignature", userDetails.personalSignature);
+  void _saveInfo(DYXUserLoginModel user) async{
+    SharedPreferences prefs = await _prefs;
+    if (user is Student.DYXUserStudentLoginModel) { // 登录的是学生用户
+      _saveData(prefs, user.data);
+      _saveRoleInfo(prefs, user.roleInfo);
+    } else if (user is Teacher.DYXUserTeacherLoginModel) { // 登录的是老师用户
+      _saveData(prefs, user.data);
+      _saveRoleInfo(prefs, user.roleInfo);
+    } else if (user is Parent.DYXUserParentLoginModel) { // 登录的是家长用户
+      _saveData(prefs, user.data);
+      _saveRoleInfo(prefs, user.roleInfo);
     }
 
-
-    print("用户名:${user.data.userName}");
-    print("用户名:${user.data.name}");
-    print("用户名:${user.data.phoneNumber}");
-    print("用户名:${user.data.school}");
+    prefs.setBool("isLogin", true);
     notifyListeners();
   }
 
+  /// 保存用户信息
+  void _saveData(SharedPreferences prefs, DYXUserSearchModel user) {
+    prefs.setInt("id", user.id);
+    prefs.setInt("role", user.role);
+    prefs.setString("userName", user.userName);
+    prefs.setString("phoneNumber", user.phoneNumber);
+    prefs.setString("token", user.token);
+
+    var userDetails = user.userDetails;
+    prefs.setInt("userDetailsId", userDetails.id);
+    prefs.setString("name", userDetails.name);
+    prefs.setString("avatar", userDetails.avatar);
+    prefs.setString("birthday", userDetails.birthdayStr);
+    prefs.setString("qq", userDetails.qq);
+    prefs.setString("email", userDetails.email);
+    prefs.setString("card", userDetails.card);
+    prefs.setString("sex", userDetails.sexStr);
+  }
+
+  /// 保存角色的信息
+  void _saveRoleInfo(SharedPreferences prefs, DYXUserLoginRoleInfo roleInfo) {
+    if (roleInfo is Student.RoleInfo) { // 学生角色的信息
+      var school = roleInfo.school;
+      if (school != null) { // 保存学校信息
+        prefs.setString("schoolName", school.schoolName);
+        prefs.setString("schoolInfo", school.schoolInfo);
+        prefs.setString("schoolDate", school.schoolDate);
+      }
+      var clazz = roleInfo.clazz;
+      if (clazz != null) { // 保存班级信息
+        prefs.setString("className", clazz.className);
+        var teacher = clazz.teacher;
+        if (teacher != null) { // 保存班主任信息
+          prefs.setString("teacherName", teacher.userName);
+          prefs.setString("teacherPhoneNumber", teacher.phoneNumber);
+        }
+      }
+    } else if(roleInfo is Teacher.RoleInfo) { // 老师角色的信息
+      prefs.setString("title", roleInfo.title);
+      prefs.setString("identity", roleInfo.identity);
+      var school = roleInfo.school;
+      if (school != null) { // 保存学校信息
+        prefs.setString("schoolName", school.schoolName);
+        prefs.setString("schoolInfo", school.schoolInfo);
+        prefs.setString("schoolDate", school.schoolDate);
+      }
+    } else if (roleInfo is Parent.RoleInfo) { // 家长角色的信息
+
+    }
+  }
   /// 注销
   void logOut() {
-    prefs.remove("name");
-    prefs.remove("userName");
-    prefs.remove("school");
-    prefs.remove("phoneNumber");
-    prefs.remove("token");
-    prefs.remove("role");
-    prefs.remove("role");
-    prefs.remove("id");
-
-    prefs.remove("avatar");
-    prefs.remove("sex");
-    prefs.remove("birthday");
-    prefs.remove("personalSignature");
-
+    prefs.clear();
     prefs.setBool("isLogin", false);
     notifyListeners();
   }
@@ -97,7 +131,9 @@ class DYXUserViewModel extends ChangeNotifier {
   /// 用户名
   String get userName => isLogin ? prefs.getString("userName") : null;
   /// 学校
-  String get school => isLogin ? prefs.getString("school") : null;
+  String get schoolName => isLogin ? prefs.getString("schoolName") : null;
+  /// 班级
+  String get className => isLogin ? prefs.getString("className") : null;
   /// 手机号
   String get phoneNumber => isLogin ? prefs.getString("phoneNumber") : null;
   /// token

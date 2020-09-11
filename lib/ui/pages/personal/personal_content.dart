@@ -26,7 +26,7 @@ class DYXPersonalContent extends StatelessWidget {
       children: <Widget>[
         Consumer<DYXUserViewModel>(
           builder: (ctx, userVM, child) => buildHead(context,
-              userVM.name ?? "请先登录",
+              userVM.isLogin ? (userVM.name ?? "未知") : ("请先登录"),
               buildAvatarImg(userVM),
               onPressed: () {
                 if(userVM.isLogin) {
@@ -39,8 +39,28 @@ class DYXPersonalContent extends StatelessWidget {
         ),
         SizedBox(height: 10.px,),
         DYXSettingItem(
+            title: "课表",
+            leading:  Icon(DYXIcons.calendar, color: DYXColors.navBar[50],),
+            onPressed: () {}
+        ),
+        DYXSettingItem(
             title: "课程",
             leading:  Icon(DYXIcons.graduation, color: DYXColors.navBar[50],),
+            onPressed: () {}
+        ),
+        DYXSettingItem(
+            title: "作业",
+            leading:  Icon(DYXIcons.pencil, color: DYXColors.navBar[800],),
+            onPressed: () {}
+        ),
+        DYXSettingItem(
+            title: "考试",
+            leading:  Icon(DYXIcons.exam, color: DYXColors.navBar[700],),
+            onPressed: () {}
+        ),
+        DYXSettingItem(
+            title: "打卡",
+            leading:  Icon(DYXIcons.fingerprint, color: DYXColors.navBar[700],),
             onPressed: () {}
         ),
         SizedBox(height: 10.px),

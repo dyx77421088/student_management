@@ -1,5 +1,10 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:student_management/core/viewmodel/user_view_model.dart';
 import 'package:student_management/ui/pages/setting/setting_content.dart';
+import 'package:student_management/ui/shared/dialog/dialog.dart';
+import 'package:student_management/ui/shared/toast/toast.dart';
 
 class DYXSettingPage extends StatelessWidget {
   static const String routeName = "/settings";
@@ -9,11 +14,28 @@ class DYXSettingPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('设置'),),
 //      body: DYXSettingContent(),
-      bottomSheet: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: RaisedButton(child: Text('退出登录', style: Theme.of(context).textTheme.subtitle1.copyWith(color: Colors.white),), onPressed: (){}, color: Color.fromRGBO(157,41,51, 1),)
+      bottomSheet: Consumer<DYXUserViewModel>(
+        builder: (ctx, userVM, child) => Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: userVM.isLogin ? buildExitButton(context, userVM) : Text(''),
+        ),
       ),
     );
   }
+
+  /// 退出按钮
+  Widget buildExitButton(BuildContext context, DYXUserViewModel userVM) =>
+    DYXDialog.dialogButton(
+      context: context,
+      buttonText: "退出登录",
+      desc: "是否退出",
+      dialogType: DialogType.INFO,
+      btnOkOnPress: (){
+        userVM.logOut();
+        DYXToast.showToast("成功退出用户!");
+        Navigator.of(context).pop();
+      },
+      btnCancelOnPress: () {}
+    );
 }

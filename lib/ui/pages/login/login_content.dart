@@ -27,19 +27,16 @@ class _DYXLoginContentState extends State<DYXLoginContent> {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(20.px),
-        child: Stack(
+        child: Column(
           children: <Widget>[
-            Column(
-              children: <Widget>[
-                buildFlare(),
-                buildCard(),
-              ],
-            ),
+            buildFlare(),
+            buildCard(),
           ],
         ),
       ),
     );
   }
+
 
   /// flare 动画
   Widget buildFlare() {

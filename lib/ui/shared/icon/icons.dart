@@ -57,8 +57,21 @@ class DYXIcons {
   // 向右边的图片
   static const chevron_right = Entypo.chevron_right;
 
+  // 日历
+  static const calendar = AntDesign.calendar;
+
+  // 笔
+  static const pencil = Entypo.pencil;
+
+  // 考试
+  static const exam = Entypo.open_book;
+
+  // 指纹
+  static const fingerprint = Entypo.fingerprint;
+
 
 //  line_icons包下的
   static const user = LineIcons.user;
+
 
 }
