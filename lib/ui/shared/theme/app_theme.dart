@@ -11,12 +11,12 @@ class DYXAppTheme {
   static double subTitle1Size = 16.px;
   static double subTitle2Size = 8.px;
 
-  static double headline1Size = 72.px;
-  static double headline2Size = 64.px;
-  static double headline3Size = 56.px;
-  static double headline4Size = 48.px;
-  static double headline5Size = 40.px;
-  static double headline6Size = 32.px;
+  static double headline1Size = 36.px;
+  static double headline2Size = 32.px;
+  static double headline3Size = 28.px;
+  static double headline4Size = 24.px;
+  static double headline5Size = 20.px;
+  static double headline6Size = 16.px;
 
   static double appbarSize = 16.px;
 

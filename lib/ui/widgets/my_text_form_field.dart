@@ -46,7 +46,7 @@ class DYXTextFormField extends StatefulWidget {
       this.suffixIcon,
       this.validator,
       this.focusNode
-      });
+      }):assert(maxLength >= 5 && maxLength <= 200);
 
   @override
   _MyTextFormFieldState createState() => _MyTextFormFieldState();

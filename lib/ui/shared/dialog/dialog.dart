@@ -21,7 +21,7 @@ class DYXDialog {
     Widget body, // 主体
     Alignment alignment = Alignment.center, // 对齐方式
     AnimType animType = AnimType.SCALE, // 动画
-  }) async{
+  })async{
     return AwesomeDialog(
       context: context,
       headerAnimationLoop: headerAnimationLoop,

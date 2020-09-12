@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management/core/viewmodel/count_down_view_model.dart';
 import 'package:student_management/core/viewmodel/user_view_model.dart';
@@ -43,6 +44,16 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: DYXRouter.onGenerateRoute,
       onUnknownRoute: DYXRouter.onUnknownRoute,
       debugShowCheckedModeBanner: false,
+      // 支持国际化
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('zh', 'CH'),
+        const Locale('en', 'US'),
+      ],
+      locale: Locale('zh'),
     );
   }
 }

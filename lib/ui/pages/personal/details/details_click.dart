@@ -4,7 +4,9 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:student_management/core/services/user_details/user_details_update.dart';
+import 'package:student_management/core/utils/date_time_utils.dart';
 import 'package:student_management/core/viewmodel/user_view_model.dart';
+import 'package:student_management/ui/pages/personal/details/widget/details_update_personal_signature.dart';
 import 'package:student_management/ui/shared/dialog/dialog.dart';
 import 'package:student_management/ui/shared/image/image_cropper/image_cropper_utils.dart';
 import 'package:student_management/ui/shared/image/image_picker/image_picker_utils.dart';
@@ -141,11 +143,44 @@ class _SexRadioState extends State<SexRadio> {
 
 
 /// 用户详情中单击生日的监听
-void clickBirthday() {
-  DYXToast.showToast("单击了生日设置");
+void clickBirthday(BuildContext context, DYXUserViewModel userVM) async{
+  var result = await showDatePicker(
+    locale: Locale('zh'),
+    context: context,
+    initialDate: DateTime.now(),
+    firstDate: DateTime(1970),
+    lastDate: DateTime(2021),
+  );
+  // 修改生日
+  if(result != null) {
+    FormData data = FormData.fromMap({
+      "birthday": DYXDateTimeUtils.getTimeStamp(result),
+    });
+    DYXUserDetailsUpdate.update(
+        token: userVM.token,
+        formData: data
+    ).then((value) => userVM.birthdayTimeStamp = value['data']['birthday']);
+  }
 }
 
 /// 用户详情中单击个性签名的监听
-void clickPersonalSignature() {
-  DYXToast.showToast("单击了个性签名设置");
+void clickPersonalSignature(BuildContext context, DYXUserViewModel userVM) {
+  // 跳转到修改详情界面
+  Navigator.pushNamed<dynamic>(
+      context,
+      DYXDetailsUpdatePersonalSignaturePage.routeName,
+      arguments: userVM.personalSignature
+  ).then((value) => _savePersonalSignature(value, userVM));
+}
+
+/// 保存PersonalSignature
+void _savePersonalSignature(String value, DYXUserViewModel userVM) {
+  FormData formData = FormData.fromMap({
+    "personal_signature": value
+  });
+  // 发送请求，修改数据库
+  DYXUserDetailsUpdate.update(
+      token: userVM.token,
+      formData: formData
+  ).then((value) => userVM.personalSignature = value['data']['personal_signature']);
 }

@@ -22,8 +22,8 @@ class DYXDetailsContent extends StatelessWidget {
               buildAvatar(context, userVM),
               buildNickName(context, userVM),
               buildSex(context, userVM),
-              buildBirthday(userVM),
-              buildPersonalSignature(userVM),
+              buildBirthday(context, userVM),
+              buildPersonalSignature(context, userVM),
             ],
           ),
         ),
@@ -32,23 +32,23 @@ class DYXDetailsContent extends StatelessWidget {
   }
 
   /// 个性签名
-  DYXSettingItem buildPersonalSignature(DYXUserViewModel userVM) {
+  DYXSettingItem buildPersonalSignature(BuildContext context, DYXUserViewModel userVM) {
     return DYXSettingItem(
       title: "个性签名",
       trailing: buildTrailing(userVM.personalSignature ?? "无"),
       onPressed: (){
-        clickPersonalSignature();
+        clickPersonalSignature(context, userVM);
       },
     );
   }
 
   /// 生日
-  DYXSettingItem buildBirthday(DYXUserViewModel userVM) {
+  DYXSettingItem buildBirthday(BuildContext context, DYXUserViewModel userVM) {
     return DYXSettingItem(
       title: "出生年月",
       trailing: buildTrailing(userVM.birthday ?? "无"),
       onPressed: (){
-        clickBirthday();
+        clickBirthday(context, userVM);
       },
     );
   }
@@ -120,7 +120,11 @@ class DYXDetailsContent extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text(title),
+        Container(
+          width: 200.px,
+          alignment: Alignment.centerRight,
+          child: Text(title, overflow: TextOverflow.ellipsis,),
+        ),
         SizedBox(width: 5.px,),
         Icon(DYXIcons.chevron_right)
       ],

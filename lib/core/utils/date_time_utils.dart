@@ -15,4 +15,9 @@ class DYXDateTimeUtils {
   static int getNowTimeStamp() {
     return (DateTime.now().millisecondsSinceEpoch / 1000).round();
   }
+
+  /// 获得时间戳
+  static int getTimeStamp(DateTime dateTime) {
+    return (dateTime.millisecondsSinceEpoch / 1000).round();
+  }
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:date_format/date_format.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +11,7 @@ import 'package:student_management/core/model/user/user_student_login_model.dart
 import 'package:student_management/core/model/user/user_teacher_login_model.dart' as Teacher;
 import 'package:student_management/core/model/user/user_parent_login_model.dart' as Parent;
 import 'package:student_management/core/services/login/user_request.dart';
+import 'package:student_management/core/utils/date_time_utils.dart';
 /// 用户的一些信息的通知
 class DYXUserViewModel extends ChangeNotifier {
   DYXUserLoginModel _user;
@@ -171,6 +173,16 @@ class DYXUserViewModel extends ChangeNotifier {
 
   set avatar(String avatar) { // 设置头像
     prefs.setString("avatar", avatar);
+    notifyListeners();
+  }
+
+  set birthdayTimeStamp(int birthday) { // 根据时间戳设置生日
+    prefs.setString("birthday", DYXDateTimeUtils.timeStampFormatToStr(birthday, [yyyy, '-', mm, '-', dd]));
+    notifyListeners();
+  }
+
+  set personalSignature(String personalSignature) { // 设置用户签名
+    prefs.setString("personalSignature", personalSignature);
     notifyListeners();
   }
 
