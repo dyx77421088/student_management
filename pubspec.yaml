@@ -29,7 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
 #  网络请求
-  dio: ^3.0.9
+  dio: ^3.0.10
 #  通知
   provider: ^4.3.1
 #  图标库
@@ -47,6 +47,8 @@ dependencies:
   cached_network_image: ^2.2.0+1
 #  图片处理(相机什么的)
   image_picker: ^0.6.7+4
+#  图片裁剪
+  image_cropper: ^1.3.1
 #  flare动画
   flare_flutter: ^2.0.5
 #  google bar

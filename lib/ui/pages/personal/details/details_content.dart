@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management/core/extension/int_extension.dart';
 import 'package:student_management/core/viewmodel/user_view_model.dart';
+import 'package:student_management/ui/pages/personal/details/details_click.dart';
 import 'package:student_management/ui/shared/dialog/dialog.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
@@ -20,7 +21,7 @@ class DYXDetailsContent extends StatelessWidget {
             children: <Widget>[
               buildAvatar(context, userVM),
               buildNickName(context, userVM),
-              buildSex(userVM),
+              buildSex(context, userVM),
               buildBirthday(userVM),
               buildPersonalSignature(userVM),
             ],
@@ -35,7 +36,9 @@ class DYXDetailsContent extends StatelessWidget {
     return DYXSettingItem(
       title: "个性签名",
       trailing: buildTrailing(userVM.personalSignature ?? "无"),
-      onPressed: (){},
+      onPressed: (){
+        clickPersonalSignature();
+      },
     );
   }
 
@@ -44,16 +47,21 @@ class DYXDetailsContent extends StatelessWidget {
     return DYXSettingItem(
       title: "出生年月",
       trailing: buildTrailing(userVM.birthday ?? "无"),
-      onPressed: (){},
+      onPressed: (){
+        clickBirthday();
+      },
     );
   }
 
   /// 性别
-  DYXSettingItem buildSex(DYXUserViewModel userVM) {
+  DYXSettingItem buildSex(BuildContext context, DYXUserViewModel userVM) {
     return DYXSettingItem(
       title: "性别",
       trailing: buildTrailing(userVM.sex ?? "未知"),
-      onPressed: (){},
+      onPressed: (){
+        // 单击性别后的监听
+        clickSex(context, userVM);
+      },
     );
   }
 
@@ -66,23 +74,15 @@ class DYXDetailsContent extends StatelessWidget {
       title: "昵称",
       trailing: buildTrailing(userVM.userName),
       onPressed: (){
-        DYXDialog.showDialog(
-          context: context,
-          body: DYXTextFormField(controller: nickNameController,),
-          btnCancelOnPress: () {},
-          btnOkOnPress: () {
-            DYXToast.showToast("你输入的信息是${nickNameController.text}");
-          },
-        );
+        // 单击用户名后的监听
+        clickNickName(context, nickNameController);
       },
     );
   }
 
   /// 头像
   Widget buildAvatar(BuildContext context, DYXUserViewModel userVM) {
-    return buildAvatarSetting(context, userVM, () {
-      DYXToast.showToast("单击了头像设置");
-    });
+    return buildAvatarSetting(context, userVM, () {clickAvatar(context, userVM);});
   }
 
   /// 头像

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class DYXDialog {
   /// 展示对话框
-  static void showDialog({
+  static Future showDialog({
     @required BuildContext context,
     bool headerAnimationLoop = false,// 头部动画循环
     DialogType dialogType = DialogType.INFO,// 头部类型,默认为info
@@ -19,8 +19,10 @@ class DYXDialog {
     bool dismissOnBackKeyPress = true, // 按回退建关闭对话框
     Duration autoHide, // 过了时间后自动隐藏
     Widget body, // 主体
-  }) {
-    AwesomeDialog(
+    Alignment alignment = Alignment.center, // 对齐方式
+    AnimType animType = AnimType.SCALE, // 动画
+  }) async{
+    return AwesomeDialog(
       context: context,
       headerAnimationLoop: headerAnimationLoop,
       dialogType: dialogType,
@@ -36,6 +38,8 @@ class DYXDialog {
       dismissOnBackKeyPress: dismissOnBackKeyPress,
       autoHide: autoHide,
       body: body,
+      aligment: alignment,
+      animType: animType
     )..show();
   }
 
@@ -59,6 +63,8 @@ class DYXDialog {
     bool dismissOnBackKeyPress = true, // 按回退建关闭对话框
     Duration autoHide, // 过了时间后自动隐藏
     Widget body, // 主体
+    Alignment alignment = Alignment.center, // 对齐方式
+    AnimType animType = AnimType.SCALE, // 动画
   }) {
     return AnimatedButton(
       text: buttonText,
@@ -81,6 +87,8 @@ class DYXDialog {
           dismissOnBackKeyPress: dismissOnBackKeyPress,
           autoHide: autoHide,
           body: body,
+          alignment: alignment,
+          animType: animType
         );
       },
     );

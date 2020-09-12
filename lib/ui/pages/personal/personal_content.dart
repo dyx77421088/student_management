@@ -21,8 +21,8 @@ class DYXPersonalContent extends StatelessWidget {
     );
   }
 
-  Column buildInfo(BuildContext context) {
-    return Column(
+  Widget buildInfo(BuildContext context) {
+    return ListView(
       children: <Widget>[
         Consumer<DYXUserViewModel>(
           builder: (ctx, userVM, child) => buildHead(context,

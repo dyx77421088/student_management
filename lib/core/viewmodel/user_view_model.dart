@@ -85,6 +85,8 @@ class DYXUserViewModel extends ChangeNotifier {
     prefs.setString("email", userDetails.email);
     prefs.setString("card", userDetails.card);
     prefs.setString("sex", userDetails.sexStr);
+    prefs.setInt("sexInt", userDetails.sex);
+    prefs.setString("personalSignature", userDetails.personalSignature);
   }
 
   /// 保存角色的信息
@@ -148,6 +150,8 @@ class DYXUserViewModel extends ChangeNotifier {
   String get avatar => isLogin ? prefs.getString("avatar") : null;
   /// 性别
   String get sex => isLogin ? prefs.getString("sex") : null;
+  /// 性别int值
+  int get sexInt => isLogin ? prefs.getInt("sexInt") : null;
   /// 生日
   String get birthday => isLogin ? prefs.getString("birthday") : null;
   /// 个性签名
@@ -155,4 +159,19 @@ class DYXUserViewModel extends ChangeNotifier {
 
   /// 是否登录
   bool get isLogin => prefs == null ? false : prefs.getBool("isLogin");
+
+  ///
+  /// 设置
+  ///
+  set sexInt(int sex) { // 设置性别
+    prefs.setInt("sexInt", sex);
+    prefs.setString("sex", sex == -1 ? "女" : (sex == 1 ? "男" : "保密"));
+    notifyListeners();
+  }
+
+  set avatar(String avatar) { // 设置头像
+    prefs.setString("avatar", avatar);
+    notifyListeners();
+  }
+
 }

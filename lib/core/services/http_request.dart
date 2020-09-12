@@ -8,7 +8,13 @@ class DYXHttpRequest {
   final Dio dio = Dio(baseOptions);
 
 
-  Future<T> request<T>(String url, {data, String method = "get", Map<String, dynamic> params, Interceptor inter, Map<String, dynamic> headers}) async{
+  Future<T> request<T>(String url, {
+    data,
+    String method = "get",
+    Map<String, dynamic> params,
+    Interceptor inter,
+    Map<String, dynamic> headers,
+  }) async{
     print('url=$url');
 
     // 创建单独配置
@@ -39,6 +45,7 @@ class DYXHttpRequest {
         if (message != null) {
           DYXToast.showToast(message);
         }
+        print(error);
         return error;
       }
     );
@@ -51,7 +58,6 @@ class DYXHttpRequest {
     }
 
     dio.interceptors.addAll(inters);
-
 
     // 发送网络请求
     try {
