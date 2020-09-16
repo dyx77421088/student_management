@@ -34,13 +34,17 @@ class DYXHttpRequest {
       // 响应拦截
       onResponse: (response) {
         print('响应拦截');
+        final message = response.data['message'];
+        if (message != null) {
+          DYXToast.showToast(message);
+        }
         return response;
       },
       // 错误拦截
       onError: (error) {
         print('错误拦截');
-        print(error.response.data);
-        final message = error.response.data['message'];
+        print(error?.response?.data);
+        final message = error?.response?.data['message'];
         print(message);
         if (message != null) {
           DYXToast.showToast(message);

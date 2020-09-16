@@ -13,7 +13,7 @@ class DYXSettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('设置'),),
-//      body: DYXSettingContent(),
+      body: DYXSettingContent(),
       bottomSheet: Consumer<DYXUserViewModel>(
         builder: (ctx, userVM, child) => Container(
           width: double.infinity,

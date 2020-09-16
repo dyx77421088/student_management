@@ -5,9 +5,10 @@ class DYXSettingItem extends StatelessWidget {
   final String title;
   final Widget leading;
   final Function onPressed;
-  final Widget trailing;
+  final Widget trailing; // 后方图标 默认为 >
+  final bool showTrailing; // 展示trailing default=true
 
-  DYXSettingItem({this.title, this.leading, @required this.onPressed, this.trailing = const Icon(DYXIcons.chevron_right)});
+  DYXSettingItem({this.title, this.leading, @required this.onPressed, this.trailing = const Icon(DYXIcons.chevron_right), this.showTrailing=true});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class DYXSettingItem extends StatelessWidget {
         child: ListTile(
             leading: leading,
             title: Text(title),
-            trailing: trailing),
+            trailing: showTrailing ? trailing : null),
         onPressed: onPressed);
   }
 }

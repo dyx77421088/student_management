@@ -5,6 +5,7 @@ import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/personal/details/details.dart';
 import 'package:student_management/ui/pages/personal/details/widget/details_update_personal_signature.dart';
 import 'package:student_management/ui/pages/setting/setting.dart';
+import 'package:student_management/ui/pages/setting/user_security_center/user_security_center.dart';
 
 class DYXRouter {
   static final Map<String, WidgetBuilder> routes = {
@@ -14,34 +15,36 @@ class DYXRouter {
 
   static final RouteFactory onGenerateRoute = (settings) {
     switch (settings.name) {
-      // 登录路由
-      case DYXLoginPage.routeName:
+      case DYXLoginPage.routeName:// 登录路由
         return PageTransition(
             child: DYXLoginPage(),
             type: PageTransitionType.scale
         );
         break;
-      // 用户详情的路由
-      case DYXDetailsPage.routeName:
+      case DYXDetailsPage.routeName:// 用户详情的路由
         return PageTransition(
             child: DYXDetailsPage(),
             type: PageTransitionType.rotate,
             alignment: Alignment.topCenter
         );
         break;
-//        设置
-      case DYXSettingPage.routeName:
+      case DYXSettingPage.routeName:// 设置
         return PageTransition(
             child: DYXSettingPage(),
-            type: PageTransitionType.upToDown,
-            alignment: Alignment.topCenter
+            type: PageTransitionType.scale,
+            alignment: Alignment.bottomCenter
         );
         break;
-        // 修改详情
-      case DYXDetailsUpdatePersonalSignaturePage.routeName:
+      case DYXDetailsUpdatePersonalSignaturePage.routeName: // 修改详情
         return PageTransition(
             child: DYXDetailsUpdatePersonalSignaturePage(settings.arguments as String),
             type: PageTransitionType.fade,
+            alignment: Alignment.topCenter
+        );
+      case DYXUserSecurityCenterPage.routeName: // 用户安全中心
+        return PageTransition(
+            child: DYXUserSecurityCenterPage(),
+            type: PageTransitionType.scale,
             alignment: Alignment.topCenter
         );
       default:

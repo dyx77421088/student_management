@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management/core/viewmodel/user_view_model.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
@@ -8,6 +9,9 @@ import 'home_content.dart';
 
 class DYXHomePage extends StatefulWidget {
   static const String routeName = "/home";
+  final GlobalKey<InnerDrawerState> innerDrawerKey;
+
+  DYXHomePage(this.innerDrawerKey);
 
   @override
   _DYXHomePageState createState() => _DYXHomePageState();
@@ -24,7 +28,8 @@ class _DYXHomePageState extends State<DYXHomePage> {
             builder: (ctx, userVM, child) => buildAvatarImg(userVM),
           ),
           onPressed: () {
-            Scaffold.of(context).openDrawer();
+//            Scaffold.of(context).openDrawer();
+            widget.innerDrawerKey.currentState.toggle();
           },
         ),
       ),

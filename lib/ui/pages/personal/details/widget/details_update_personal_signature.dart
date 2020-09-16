@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:student_management/core/extension/int_extension.dart';
 import 'package:student_management/ui/widgets/my_text_form_field.dart';
 
+/// 修改个性签名的界面
 class DYXDetailsUpdatePersonalSignaturePage extends StatefulWidget {
   static const String routeName = "/detailsUpdatePersonalSignature";
   final String personalSignature;

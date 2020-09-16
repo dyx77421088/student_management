@@ -21,6 +21,8 @@ class DYXDialog {
     Widget body, // 主体
     Alignment alignment = Alignment.center, // 对齐方式
     AnimType animType = AnimType.SCALE, // 动画
+    bool useRootNavigator = false, //使用根导航器而不是本地导航器。当默认取消取消转到上一个屏幕而不是仅关闭对话框时，此功能很有用
+    Function onDissmissCallback
   })async{
     return AwesomeDialog(
       context: context,
@@ -39,7 +41,9 @@ class DYXDialog {
       autoHide: autoHide,
       body: body,
       aligment: alignment,
-      animType: animType
+      animType: animType,
+      useRootNavigator: useRootNavigator,
+      onDissmissCallback: onDissmissCallback,
     )..show();
   }
 

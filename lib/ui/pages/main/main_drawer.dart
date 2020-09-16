@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management/core/extension/int_extension.dart';
@@ -15,9 +16,7 @@ import 'package:student_management/ui/shared/toast/toast.dart';
 class DYXMainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 250.px,
-      child: Drawer(
+      return Material(
         child: Consumer<DYXUserViewModel>(
           builder: (ctx, userVM, child) => ListView(
             children: <Widget>[
@@ -26,8 +25,7 @@ class DYXMainDrawer extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 
   /// 退出
@@ -70,6 +68,7 @@ class DYXMainDrawer extends StatelessWidget {
       accountName: Text(userVM.name ?? "请先登录"),
       accountEmail: Text(userVM.schoolName ?? ""),
       otherAccountsPictures: <Widget>[
+
         Text(userVM.className ?? "")
       ],
     );

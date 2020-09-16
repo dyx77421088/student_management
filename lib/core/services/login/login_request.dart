@@ -13,8 +13,11 @@ class DYXLoginRequest {
         // 错误拦截
         onError: (error) {
           print('错误拦截');
-          print(error.response.data);
-          DYXToast.showToast(error.response.data["message"]);
+          print(error?.response?.data);
+          var message = error?.response?.data["message"];
+          if(message != null) {
+            DYXToast.showToast(message);
+          }
           return error;
         },
         // 响应拦截
