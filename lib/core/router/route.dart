@@ -4,8 +4,9 @@ import 'package:student_management/core/router/route_animation.dart';
 import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/personal/details/details.dart';
 import 'package:student_management/ui/pages/personal/details/widget/details_update_personal_signature.dart';
-import 'package:student_management/ui/pages/setting/setting.dart';
-import 'package:student_management/ui/pages/setting/user_security_center/user_security_center.dart';
+import 'package:student_management/ui/pages/personal/setting/setting.dart';
+import 'package:student_management/ui/pages/personal/setting/user_security_center/user_security_center.dart';
+import 'package:student_management/ui/pages/personal/timetable/time_table.dart';
 import 'package:student_management/ui/shared/phone_verification/phone_verification.dart';
 
 class DYXRouter {
@@ -45,6 +46,12 @@ class DYXRouter {
       case DYXUserSecurityCenterPage.routeName: // 用户安全中心
         return PageTransition(
             child: DYXUserSecurityCenterPage(),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.topCenter
+        );
+      case DYXTimeTablePage.routeName: // 课表
+        return PageTransition(
+            child: DYXTimeTablePage(),
             type: PageTransitionType.rightToLeft,
             alignment: Alignment.topCenter
         );

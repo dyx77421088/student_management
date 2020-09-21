@@ -17,9 +17,10 @@ class DYXMainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
       return Material(
+        color: Colors.transparent,
         child: Consumer<DYXUserViewModel>(
-          builder: (ctx, userVM, child) => ListView(
-            children: <Widget>[
+          builder: (ctx, userVM, child)=>Column(
+            children: [
               buildHeaderView(context, userVM),
               buildExit(context, userVM),
             ],
@@ -60,7 +61,7 @@ class DYXMainDrawer extends StatelessWidget {
   Widget buildHeaderView(BuildContext context, DYXUserViewModel userVM) {
     return UserAccountsDrawerHeader(
       decoration: BoxDecoration(
-        color: DYXColors.blue[200],
+        color: Colors.transparent,
 //        borderRadius: BorderRadius.circular(30.px)
       ),
       margin: EdgeInsets.only(bottom: 20.px),

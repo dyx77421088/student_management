@@ -1,4 +1,6 @@
 import 'package:flutter_inner_drawer/inner_drawer.dart';
+import 'package:provider/provider.dart';
+import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/pages/main/main_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:student_management/ui/shared/inner_drawer/inner_drawer_utils.dart';
@@ -75,7 +77,11 @@ class _DYXMainScreenState extends State<DYXMainPage>{
           ),
         ),
       leftChild: DYXMainDrawer(),
-      rightChild: Text('text'),
+      rightChild: Column(
+        children: [
+          Consumer<DYXUserViewModel>(builder: (ctx, userVM, child) => Text('text'),),
+        ],
+      ),
     );
   }
 }

@@ -5,12 +5,14 @@ import 'package:student_management/core/router/route_animation.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/personal/details/details.dart';
-import 'package:student_management/ui/pages/setting/setting.dart';
+import 'package:student_management/ui/pages/personal/timetable/time_table.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
 import 'package:student_management/ui/shared/theme/my_colors.dart';
 import 'package:student_management/core/extension/int_extension.dart';
 import 'package:student_management/ui/widgets/setting_item.dart';
+
+import 'setting/setting.dart';
 
 class DYXPersonalContent extends StatelessWidget {
   @override
@@ -41,7 +43,9 @@ class DYXPersonalContent extends StatelessWidget {
         DYXSettingItem(
             title: "课表",
             leading:  Icon(DYXIcons.calendar, color: DYXColors.navBar[50],),
-            onPressed: () {}
+            onPressed: () {
+              Navigator.pushNamed(context, DYXTimeTablePage.routeName);
+            }
         ),
         DYXSettingItem(
             title: "课程",
