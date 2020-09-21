@@ -2,7 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:provider/provider.dart';
-import 'package:student_management/core/services/user/user_update_password.dart';
+import 'package:student_management/core/services/user/user_update.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/shared/dialog/dialog.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
@@ -82,7 +82,7 @@ class _DYXUpdatePasswordByOldPasswordState extends State<DYXUpdatePasswordByOldP
 
   /// 传参数到服务器修改密码
   void updatePassword(DYXUserViewModel userVM) {
-    DYXUserUpdatePassword.updatePasswordByPassword(
+    DYXUserUpdate.updatePasswordByPassword(
       userVM.token,
       _passwordController.text,
       _newPasswordController.text

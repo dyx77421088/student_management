@@ -72,6 +72,8 @@ dependencies:
   flutter_colorpicker: ^0.3.4
 #  验证码
   pin_code_fields: ^5.1.0
+#  时间表
+  timetable: ^0.2.8
 
 dev_dependencies:
   flutter_test:

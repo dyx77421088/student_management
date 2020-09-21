@@ -11,19 +11,19 @@ class DYXLoginRequest {
   }
 
   /// 检测手机验证码
-  static Future checkCode(String phoneNumber, String code) async{
-    var a = {
-      "code": 400
-    };
-    if(code == "903361") {
-      a['code'] = 200;
-      return a;
-    }
-    return a;
-//    return DYXHttpRequest().request(
-//      "/user/sendCode",
-//      data: {"phone_number": phoneNumber},
-//      method: "post",
-//    );
+  static Future checkCode(String token, String phoneNumber, String code, {
+    bool showErrorMessage=false,
+    bool showSuccessMessage= false,
+    bool showSuccessCode200Message= false
+  }) async{
+    return DYXHttpRequest().request(
+      "/user/check_phone_code",
+      data: {"phone_number": phoneNumber, "code": code},
+      method: "post",
+      headers: {"token": token},
+      showErrorMessage: showErrorMessage,
+      showSuccessMessage: showSuccessMessage,
+      showSuccessCode200Message: showSuccessCode200Message
+    );
   }
 }

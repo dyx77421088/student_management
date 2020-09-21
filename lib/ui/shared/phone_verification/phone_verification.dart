@@ -88,17 +88,16 @@ class _DYXPhoneVerificationState extends State<DYXPhoneVerification> {
       errorAnimationController: errorController,
       context: context,
       length: 6,
-      enabled: enabled,
+//      enabled: enabled,
+      enabled: true, // 启动可用
       onChanged: (_){},
       onCompleted: (String code) {
-        DYXLoginRequest.checkCode(userVM.phoneNumber, code).then((value){
+        DYXLoginRequest.checkCode(userVM.token, userVM.phoneNumber, code).then((value){
           if (value['code'] == 200) {
-            DYXToast.showToast("成功");
             // 调用回调方法
             widget.onPressed();
-          } else {
+          } else { // 验证码错误，错误动画
             errorController.add(ErrorAnimationType.shake);
-            DYXToast.showToast("验证码错误");
           }
         });
       },

@@ -16,6 +16,7 @@ class DYXHttpRequest {
     Map<String, dynamic> headers, // 另外一种数据，比如token
     bool showSuccessMessage = true, // 展示成功的message
     bool showErrorMessage = true, // 展示失败的message
+    bool showSuccessCode200Message = true, // 展示成功请求的200code信息
   }) async{
     print('url=$url');
 
@@ -38,7 +39,9 @@ class DYXHttpRequest {
         print('响应拦截');
         final message = response.data['message'];
         if (message != null && showSuccessMessage) {
-          DYXToast.showToast(message);
+          if(response.data['code'] == 200 && showSuccessCode200Message || response.data['code'] != 200) {
+            DYXToast.showToast(message);
+          }
         }
         return response;
       },

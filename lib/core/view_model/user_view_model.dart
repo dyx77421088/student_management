@@ -190,4 +190,9 @@ class DYXUserViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  set phoneNumber(String phoneNumber) { // 设置用户手机号
+    prefs.setString("phoneNumber", phoneNumber);
+    notifyListeners();
+  }
+
 }
