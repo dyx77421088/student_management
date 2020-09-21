@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:student_management/core/services/user_details/user_details_update.dart';
 import 'package:student_management/core/utils/date_time_utils.dart';
-import 'package:student_management/core/viewmodel/user_view_model.dart';
+import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/pages/personal/details/widget/details_update_personal_signature.dart';
 import 'package:student_management/ui/shared/dialog/dialog.dart';
 import 'package:student_management/ui/shared/image/image_cropper/image_cropper_utils.dart';
@@ -170,7 +170,11 @@ void clickPersonalSignature(BuildContext context, DYXUserViewModel userVM) {
       context,
       DYXDetailsUpdatePersonalSignaturePage.routeName,
       arguments: userVM.personalSignature
-  ).then((value) => _savePersonalSignature(value, userVM));
+  ).then((value) { // 回调
+    if(value != null && value != userVM.personalSignature) {
+      _savePersonalSignature(value, userVM);
+    }
+  });
 }
 
 /// 保存PersonalSignature

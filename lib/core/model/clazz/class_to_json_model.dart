@@ -26,9 +26,9 @@ class DYXClassToJsonModel {
 
   factory DYXClassToJsonModel.fromJson(Map<String, dynamic> json) => DYXClassToJsonModel(
     id: json["id"],
-    teacher: DYXUserToJsonModel.fromJson(json["teacher"]),
+    teacher: json['teacher'] != null ?  DYXUserToJsonModel.fromJson(json["teacher"]) : null,
     className: json["class_name"],
-    school: DYXSchoolToJsonModel.fromJson(json["school"]),
+    school: json["school"] != null ? DYXSchoolToJsonModel.fromJson(json["school"]) : null,
   );
 
   Map<String, dynamic> toJson() => {

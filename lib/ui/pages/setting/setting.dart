@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:student_management/core/viewmodel/user_view_model.dart';
+import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/pages/setting/setting_content.dart';
 import 'package:student_management/ui/shared/dialog/dialog.dart';
 import 'package:student_management/ui/shared/toast/toast.dart';

@@ -12,6 +12,9 @@ class DYXIcons {
   // 手机号
   static const phone = MaterialCommunityIcons.phone;
 
+  // 手机
+  static const phone_iphone = MaterialIcons.phone_iphone;
+
   // 验证码
   static const code = FontAwesome.code;
 
@@ -68,6 +71,15 @@ class DYXIcons {
 
   // 指纹
   static const fingerprint = Entypo.fingerprint;
+
+  // 向左的箭头
+  static const arrow_left = AntDesign.arrowleft;
+
+  // check
+  static const check_ok = AntDesign.checkcircle;
+
+  // 警告
+  static const warning = Entypo.warning;
 
 
 //  line_icons包下的

@@ -1,35 +1,29 @@
-import 'package:dio/dio.dart';
 import 'package:student_management/core/services/http_request.dart';
-import 'package:student_management/ui/shared/toast/toast.dart';
 
 class DYXLoginRequest {
   /// 发送验证码
-  static void sendCode(String phoneNumber, {Function onResponse}) {
-    DYXHttpRequest().request(
+  static Future sendCode(String phoneNumber) {
+    return DYXHttpRequest().request(
       "/user/sendCode",
       data: {"phone_number": phoneNumber},
       method: "post",
-      inter: InterceptorsWrapper(
-        // 错误拦截
-        onError: (error) {
-          print('错误拦截');
-          print(error?.response?.data);
-          var message = error?.response?.data["message"];
-          if(message != null) {
-            DYXToast.showToast(message);
-          }
-          return error;
-        },
-        // 响应拦截
-        onResponse: (response) {
-          print('响应拦截');
-          DYXToast.showToast(response.data["message"]);
-          // 响应之后执行的方法
-          if (onResponse != null)
-            onResponse();
-          return response;
-        },
-      )
     );
+  }
+
+  /// 检测手机验证码
+  static Future checkCode(String phoneNumber, String code) async{
+    var a = {
+      "code": 400
+    };
+    if(code == "903361") {
+      a['code'] = 200;
+      return a;
+    }
+    return a;
+//    return DYXHttpRequest().request(
+//      "/user/sendCode",
+//      data: {"phone_number": phoneNumber},
+//      method: "post",
+//    );
   }
 }

@@ -27,7 +27,7 @@ class DYXInnerDrawerUtils {
     Color colorTransitionScaffold, // 滑动时更改scaffold（脚手架）的背景颜色
     InnerDrawerAnimation leftAnimationType = InnerDrawerAnimation.static, // left动画（静态/线性/二次）
     InnerDrawerAnimation rightAnimationType = InnerDrawerAnimation.static, // right动画（静态/线性/二次）
-    Decoration backgroundDecoration, // 管理主要背景装饰的可能性
+    Decoration backgroundDecoration, // 管理主要背景装饰的
     InnerDrawerCallback innerDrawerCallback, // 打开或关闭InnerDrawer时调用的可选回调
     InnerDragUpdateCallback onDragUpdate // 当指针与屏幕接触并向右或向左移动时 回调的方法
 }) {

@@ -22,8 +22,8 @@ class DYXParentSearchModel {
   String card;
   String phoneNumber;
   String birthday;
-  dynamic qq;
-  dynamic email;
+  String qq;
+  String email;
 
   factory DYXParentSearchModel.fromJson(Map<String, dynamic> json) => DYXParentSearchModel(
     id: json["id"],

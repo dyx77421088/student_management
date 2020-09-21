@@ -4,6 +4,7 @@ import 'package:student_management/core/model/user/user_student_login_model.dart
 import 'package:student_management/core/model/user/user_teacher_login_model.dart';
 import 'package:student_management/core/services/http_request.dart';
 import 'package:student_management/core/model/user/user_login_model.dart';
+import 'package:student_management/ui/shared/toast/toast.dart';
 
 class DYXUserRequest {
   /// 用户登录
@@ -23,7 +24,7 @@ class DYXUserRequest {
         data: {"phone_number": phoneNumber, "code": code},
         method: "post",
     );
-
+    print(user);
     return saveInfo(user);
   }
 
@@ -35,7 +36,10 @@ class DYXUserRequest {
       method: "post",
       inter: inter
     );
-
+    if(user['code'] < 0) {
+      DYXToast.showToast("token失效,登录失败");
+      return null;
+    }
     return saveInfo(user);
   }
 

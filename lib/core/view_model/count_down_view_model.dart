@@ -26,9 +26,9 @@ class DYXCountDownViewModel extends ChangeNotifier {
 
   var _countTime2 = 0;
   Timer _timer2;
-  /// 计时器1
+  /// 计时器2
   void startTimer2() {
-    _countTime1 = 60;
+    _countTime2 = 60;
 
     final call = (_) {
       if(_countTime2 <= 0) {
@@ -44,4 +44,26 @@ class DYXCountDownViewModel extends ChangeNotifier {
   get countTime2 => _countTime2;
 
   get canCountTime2 => _countTime2 <= 0;
+
+
+  var _countTime3 = 0;
+  Timer _timer3;
+  /// 计时器3
+  void startTimer3() {
+    _countTime3 = 60;
+
+    final call = (_) {
+      if(_countTime3 <= 0) {
+        _timer3.cancel();
+      } else {
+        _countTime3 -= 1;
+      }
+      notifyListeners();
+    };
+    _timer3 = Timer.periodic(Duration(seconds: 1), call);
+  }
+
+  get countTime3 => _countTime3;
+
+  get canCountTime3 => _countTime3 <= 0;
 }

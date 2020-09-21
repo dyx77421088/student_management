@@ -29,7 +29,7 @@ class DYXUserSearchModel {
     phoneNumber: json["phone_number"],
     role: json["role"],
     token: json["token"],
-    userDetails: DYXUserDetailsAllModel.fromJson(json["user_details"]),
+    userDetails: json["user_details"] != null ? DYXUserDetailsAllModel.fromJson(json["user_details"]) : null,
   );
 
   Map<String, dynamic> toJson() => {

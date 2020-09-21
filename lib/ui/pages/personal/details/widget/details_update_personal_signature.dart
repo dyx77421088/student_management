@@ -27,7 +27,7 @@ class _DYXDetailsUpdatePersonalSignatureState extends State<DYXDetailsUpdatePers
           Container(
             alignment: AlignmentDirectional.center,
             child: FlatButton(
-              child: Text('保存'),
+              child: Text('保存', style: Theme.of(context).textTheme.headline6.copyWith(color: Colors.white),),
               onPressed: () {
                 Navigator.pop<dynamic>(context, _controller.text);
               },

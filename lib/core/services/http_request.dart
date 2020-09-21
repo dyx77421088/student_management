@@ -9,11 +9,13 @@ class DYXHttpRequest {
 
 
   Future<T> request<T>(String url, {
-    data,
-    String method = "get",
-    Map<String, dynamic> params,
-    Interceptor inter,
-    Map<String, dynamic> headers,
+    data, // 数据源
+    String method = "get", // 提交方法
+    Map<String, dynamic> params, // 另外一种数据
+    Interceptor inter, // 自定义拦截器
+    Map<String, dynamic> headers, // 另外一种数据，比如token
+    bool showSuccessMessage = true, // 展示成功的message
+    bool showErrorMessage = true, // 展示失败的message
   }) async{
     print('url=$url');
 
@@ -35,7 +37,7 @@ class DYXHttpRequest {
       onResponse: (response) {
         print('响应拦截');
         final message = response.data['message'];
-        if (message != null) {
+        if (message != null && showSuccessMessage) {
           DYXToast.showToast(message);
         }
         return response;
@@ -46,7 +48,7 @@ class DYXHttpRequest {
         print(error?.response?.data);
         final message = error?.response?.data['message'];
         print(message);
-        if (message != null) {
+        if (message != null && showErrorMessage) {
           DYXToast.showToast(message);
         }
         print(error);

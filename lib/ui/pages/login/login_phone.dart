@@ -4,8 +4,8 @@ import 'package:student_management/core/model/user/user_login_model.dart';
 import 'package:student_management/core/services/login/login_request.dart';
 import 'package:student_management/core/services/login/user_request.dart';
 import 'package:student_management/core/utils/login_utils.dart';
-import 'package:student_management/core/viewmodel/count_down_view_model.dart';
-import 'package:student_management/core/viewmodel/user_view_model.dart';
+import 'package:student_management/core/view_model/count_down_view_model.dart';
+import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/shared/animation/flare_status.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
 import 'package:student_management/ui/shared/theme/my_colors.dart';
@@ -122,13 +122,15 @@ class _DYXLoginUserState extends State<DYXLoginPhone> with SingleTickerProviderS
       return;
     }
     // 发送验证码
-    DYXLoginRequest.sendCode(_phoneController.text, onResponse: () {
-      // 开始倒计时
-      if (countVM.canCountTime1) {
-        countVM.startTimer1();
+    DYXLoginRequest.sendCode(_phoneController.text).then((value) {
+      if (value['code'] == 200) {
+        // 开始倒计时
+        if (countVM.canCountTime1) {
+          countVM.startTimer1();
+        }
+        // 小熊开心
+        widget.flare(DYXTeddy.success);
       }
-      // 小熊开心
-      widget.flare(DYXTeddy.success);
     });
   }
 
@@ -143,8 +145,8 @@ class _DYXLoginUserState extends State<DYXLoginPhone> with SingleTickerProviderS
             //先验证输入是否合法，合法执行后面的
             if(_formKey.currentState.validate()) {
               DYXUserRequest.onPhoneLogin(_phoneController.text, _codeController.text)
-                  .then((value) => saveUserInfo(value, userVM))
-                  .catchError((_){widget.flare(DYXTeddy.fail);});
+                  .then((value) => saveUserInfo(value, userVM));
+//                  .catchError((_){widget.flare(DYXTeddy.fail);});
             } else { // 熊哭泣
               widget.flare(DYXTeddy.fail);
             }
@@ -158,6 +160,8 @@ class _DYXLoginUserState extends State<DYXLoginPhone> with SingleTickerProviderS
 
   /// 保存用户信息
   void saveUserInfo(DYXUserLoginModel user, DYXUserViewModel userVM) {
+    print(user);
+    print(user == null);
     if(user == null) return;
 //    print("用户名:${user.data.userName}");
 //    print("用户名:${user.data.name}");

@@ -45,6 +45,7 @@ class DYXAppTheme {
       color: DYXColors.blue[300],
     ),
     buttonTheme: ButtonThemeData(
+      textTheme: ButtonTextTheme.primary,
       splashColor: Colors.grey,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.px))),
     ),

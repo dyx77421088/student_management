@@ -4,7 +4,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management/core/extension/int_extension.dart';
 import 'package:student_management/core/router/route_animation.dart';
-import 'package:student_management/core/viewmodel/user_view_model.dart';
+import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/personal/details/details.dart';
 import 'package:student_management/ui/shared/dialog/dialog.dart';

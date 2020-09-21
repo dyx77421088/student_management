@@ -26,8 +26,8 @@ class DYXUserTeacherLoginModel extends DYXUserLoginModel{
 
   factory DYXUserTeacherLoginModel.fromJson(Map<String, dynamic> json) => DYXUserTeacherLoginModel(
     message: json["message"],
-    data: DYXUserSearchModel.fromJson(json["data"]),
-    roleInfo: RoleInfo.fromJson(json["role_info"]),
+    data: json["data"] != null ? DYXUserSearchModel.fromJson(json["data"]) : null,
+    roleInfo: json["role_info"] != null ? RoleInfo.fromJson(json["role_info"]) : null,
     code: json["code"],
     status: json["status"],
   );
@@ -54,7 +54,7 @@ class RoleInfo extends DYXUserLoginRoleInfo{
   factory RoleInfo.fromJson(Map<String, dynamic> json) => RoleInfo(
     title: json["title"],
     identity: json["identity"],
-    school: DYXSchoolToJsonModel.fromJson(json["school"]),
+    school: json["school"] != null ? DYXSchoolToJsonModel.fromJson(json["school"]) : null,
   );
 
   Map<String, dynamic> toJson() => {

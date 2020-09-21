@@ -35,7 +35,7 @@ class DYXUserViewModel extends ChangeNotifier {
 //            遇到错误，登出
             logOut();
           }
-        )).then((value) => _saveInfo(value));
+        )).then((value) => value != null ? _saveInfo(value) : logOut());
       }
     });
   }
@@ -146,6 +146,10 @@ class DYXUserViewModel extends ChangeNotifier {
   int get role => isLogin ? prefs.getInt("role") : null;
   /// 用户id
   int get id => isLogin ? prefs.getInt("id") : null;
+  /// qq
+  String get qq => isLogin ? prefs.getString("qq") : null;
+  /// email
+  String get email => isLogin ? prefs.getString("email") : null;
 
   // 用户详细信息
   /// 头像

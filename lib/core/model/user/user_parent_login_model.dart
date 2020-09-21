@@ -29,8 +29,8 @@ class DYXUserParentLoginModel extends DYXUserLoginModel{
 
   factory DYXUserParentLoginModel.fromJson(Map<String, dynamic> json) => DYXUserParentLoginModel(
     message: json["message"],
-    data: DYXUserSearchModel.fromJson(json["data"]),
-    roleInfo: RoleInfo.fromJson(json["role_info"]),
+    data: json["data"] != null ? DYXUserSearchModel.fromJson(json["data"]) : null,
+    roleInfo: json["role_info"] != null ? RoleInfo.fromJson(json["role_info"]) : null,
     code: json["code"],
     status: json["status"],
   );

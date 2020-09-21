@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management/core/extension/int_extension.dart';
-import 'package:student_management/core/viewmodel/user_view_model.dart';
+import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/pages/personal/details/details_click.dart';
 import 'package:student_management/ui/shared/dialog/dialog.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
