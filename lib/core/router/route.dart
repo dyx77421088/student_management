@@ -4,6 +4,8 @@ import 'package:student_management/core/router/route_animation.dart';
 import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/personal/details/details.dart';
 import 'package:student_management/ui/pages/personal/details/widget/details_update_personal_signature.dart';
+import 'package:student_management/ui/pages/personal/regular/regular.dart';
+import 'file:///D:/flutterDemo/student_management/lib/ui/pages/personal/regular/regular_add/regular_add.dart';
 import 'package:student_management/ui/pages/personal/setting/setting.dart';
 import 'package:student_management/ui/pages/personal/setting/user_security_center/user_security_center.dart';
 import 'package:student_management/ui/pages/personal/timetable/time_table.dart';
@@ -52,6 +54,18 @@ class DYXRouter {
       case DYXTimeTablePage.routeName: // 课表
         return PageTransition(
             child: DYXTimeTablePage(),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.topCenter
+        );
+      case DYXRegularPage.routeName: // 打卡
+        return PageTransition(
+            child: DYXRegularPage(),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.topCenter
+        );
+      case DYXRegularAddPage.routeName: // 打卡添加
+        return PageTransition(
+            child: DYXRegularAddPage(),
             type: PageTransitionType.rightToLeft,
             alignment: Alignment.topCenter
         );

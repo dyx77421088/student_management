@@ -14,6 +14,7 @@ import 'package:student_management/core/services/login/user_request.dart';
 import 'package:student_management/core/utils/date_time_utils.dart';
 /// 用户的一些信息的通知
 class DYXUserViewModel extends ChangeNotifier {
+  static String staticToken;
   DYXUserLoginModel _user;
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   SharedPreferences prefs;
@@ -77,6 +78,8 @@ class DYXUserViewModel extends ChangeNotifier {
     prefs.setString("userName", user.userName);
     prefs.setString("phoneNumber", user.phoneNumber);
     prefs.setString("token", user.token);
+    // 保存token
+    staticToken = user.token;
 
     var userDetails = user.userDetails;
     prefs.setInt("userDetailsId", userDetails.id);
@@ -126,6 +129,7 @@ class DYXUserViewModel extends ChangeNotifier {
   void logOut() {
     prefs.clear();
     prefs.setBool("isLogin", false);
+    staticToken = null;
     notifyListeners();
   }
 

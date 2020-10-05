@@ -81,6 +81,11 @@ class DYXIcons {
   // 警告
   static const warning = Entypo.warning;
 
+  static const add = MaterialIcons.add;
+
+  // 目标
+  static const target = Feather.target;
+
 
 //  line_icons包下的
   static const user = LineIcons.user;

@@ -19,7 +19,7 @@ class DYXMainPage extends StatefulWidget {
   _DYXMainScreenState createState() => _DYXMainScreenState();
 }
 
-class _DYXMainScreenState extends State<DYXMainPage>{
+class _DYXMainScreenState extends State<DYXMainPage> {
   int _index = 0;
   GlobalKey<InnerDrawerState> _innerDrawerKey = GlobalKey<InnerDrawerState>();
   List<Widget> pages;
@@ -34,7 +34,6 @@ class _DYXMainScreenState extends State<DYXMainPage>{
       DYXPersonalPage(),
     ];
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -59,27 +58,34 @@ class _DYXMainScreenState extends State<DYXMainPage>{
         ),
       ),
       scaffold: Scaffold(
-          body: IndexedStack(
-            index: _index,
-            children: this.pages,
-          ),
-          bottomNavigationBar: Container(
-            color: DYXColors.blue[100],
-            child: DYXNavBar(
-              tabs: items,
-              selectedIndex: _index,
-              onTabChange: (index) {
-                setState(() {
-                  _index = index;
-                });
-              },
-            ),
+        body: IndexedStack(
+          index: _index,
+          children: this.pages,
+        ),
+        bottomNavigationBar: Container(
+          color: DYXColors.blue[100],
+          child: DYXNavBar(
+            tabs: items,
+            selectedIndex: _index,
+            onTabChange: (index) {
+              setState(() {
+                _index = index;
+              });
+            },
           ),
         ),
+      ),
       leftChild: DYXMainDrawer(),
       rightChild: Column(
         children: [
-          Consumer<DYXUserViewModel>(builder: (ctx, userVM, child) => Text('text'),),
+          Consumer<DYXUserViewModel>(
+              builder: (ctx, userVM, child) => Material(
+                  color: Colors.transparent,
+                  child: Container(
+                    width: double.infinity,
+                    height: 960,
+                    child: Center(child: FlutterLogo(size: 100)),
+                  ))),
         ],
       ),
     );

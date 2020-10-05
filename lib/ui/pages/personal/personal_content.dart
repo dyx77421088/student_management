@@ -5,6 +5,7 @@ import 'package:student_management/core/router/route_animation.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/personal/details/details.dart';
+import 'package:student_management/ui/pages/personal/regular/regular.dart';
 import 'package:student_management/ui/pages/personal/timetable/time_table.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
@@ -65,7 +66,9 @@ class DYXPersonalContent extends StatelessWidget {
         DYXSettingItem(
             title: "打卡",
             leading:  Icon(DYXIcons.fingerprint, color: DYXColors.navBar[700],),
-            onPressed: () {}
+            onPressed: () {
+              Navigator.pushNamed(context, DYXRegularPage.routeName);
+            }
         ),
         SizedBox(height: 10.px),
         DYXSettingItem(
