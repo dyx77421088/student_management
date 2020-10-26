@@ -40,12 +40,12 @@ class _DYXRegularPageState extends State<DYXRegularPage> {
         currentIndex: _index,
         items: [
           BottomNavigationBarItem(
-            title: Text('打卡'),
+            label: '打卡',
             icon: Icon(DYXIcons.calendar),
           ),
           BottomNavigationBarItem(
-            title: Text('目标任务'),
-              icon: Icon(DYXIcons.target)
+            label: '目标任务',
+            icon: Icon(DYXIcons.target)
           )
         ],
         onTap: (index) {

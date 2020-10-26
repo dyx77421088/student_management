@@ -9,9 +9,7 @@ import 'package:student_management/core/model/regular/regular_search_model.dart'
 import 'package:student_management/core/services/regular/regular_search.dart';
 import 'package:student_management/core/services/regular_category/regular_category.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
-import 'package:student_management/ui/shared/image/image_network.dart';
-import 'package:student_management/ui/shared/image/image_picker/image_picker_utils.dart';
-import 'package:student_management/ui/shared/toast/toast.dart';
+import 'package:student_management/ui/pages/personal/regular/regular_add/regular_add_record/regular_add_record.dart';
 
 /// 添加的界面
 class DYXRegularAddPage extends StatefulWidget {
@@ -46,7 +44,7 @@ class _DYXRegularAddPageState extends State<DYXRegularAddPage> {
   Widget build(BuildContext context) {
     print("开始!!!!!!!!!");
     return Scaffold(
-      appBar: AppBar(title: Text('新的习惯'),),
+      appBar: AppBar(title: Text('习惯库'),),
       body: Padding(
         padding: EdgeInsets.all(10.px),
         child: FutureBuilder(
@@ -81,7 +79,7 @@ class _DYXRegularAddPageState extends State<DYXRegularAddPage> {
       List<Widget> regularData = regularList.where(
               (e) => e.regularCategory.id == element.id
       ).map<Widget>(
-              (regular.Result e) => buildItem(id: e.id, title: e.title, describe: e.describe, imageUrl: e.image)
+              (regular.Result e) => buildItem(regularItem: e)
       ).toList();
 
       list.add(SliverGrid.count(
@@ -110,22 +108,19 @@ class _DYXRegularAddPageState extends State<DYXRegularAddPage> {
   );
 
   Widget buildItem({
-    @required int id,
-    String title,
-    String describe,
-    String imageUrl,
+    @required regular.Result regularItem,
   }) => Container(
     decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(5.px))),
     margin: EdgeInsets.all(5.px),
     child: GestureDetector(
       child: ListTile(
-        title: Text(title ?? "步行"),
-        subtitle: Text(describe ?? "延年益寿之法宝", overflow: TextOverflow.ellipsis, maxLines: 1,),
+        title: Text(regularItem.title ?? "步行"),
+        subtitle: Text(regularItem.describe ?? "延年益寿之法宝", overflow: TextOverflow.ellipsis, maxLines: 1,),
 //      trailing: DYXImageNetwork.avatarNetwork(url: imageUrl),
-        trailing: CircleAvatar(backgroundImage: NetworkImage(imageUrl),),
+        trailing: CircleAvatar(backgroundImage: NetworkImage(regularItem.image),),
       ),
-      onTap: () {
-        DYXToast.showToast("你点击了$id");
+      onTap: () { // 点击
+        Navigator.pushNamed(context, DYXRegularAddRecordPage.routeName, arguments: regularItem);
       },
     ),
   );

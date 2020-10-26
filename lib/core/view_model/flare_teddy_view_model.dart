@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:student_management/ui/shared/animation/flare_status.dart';

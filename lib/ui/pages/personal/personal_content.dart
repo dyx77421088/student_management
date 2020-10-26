@@ -67,7 +67,10 @@ class DYXPersonalContent extends StatelessWidget {
             title: "打卡",
             leading:  Icon(DYXIcons.fingerprint, color: DYXColors.navBar[700],),
             onPressed: () {
-              Navigator.pushNamed(context, DYXRegularPage.routeName);
+              if(DYXUserViewModel.staticToken != null)
+                Navigator.pushNamed(context, DYXRegularPage.routeName);
+              else
+                Navigator.pushNamed(context, DYXLoginPage.routeName);
             }
         ),
         SizedBox(height: 10.px),

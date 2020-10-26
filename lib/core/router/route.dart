@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:student_management/core/router/route_animation.dart';
 import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/personal/details/details.dart';
 import 'package:student_management/ui/pages/personal/details/widget/details_update_personal_signature.dart';
 import 'package:student_management/ui/pages/personal/regular/regular.dart';
+import 'package:student_management/ui/pages/personal/regular/regular_add/regular_add_record/regular_add_record.dart';
 import 'file:///D:/flutterDemo/student_management/lib/ui/pages/personal/regular/regular_add/regular_add.dart';
 import 'package:student_management/ui/pages/personal/setting/setting.dart';
 import 'package:student_management/ui/pages/personal/setting/user_security_center/user_security_center.dart';
 import 'package:student_management/ui/pages/personal/timetable/time_table.dart';
-import 'package:student_management/ui/shared/phone_verification/phone_verification.dart';
+import 'package:student_management/core/model/regular/regular_search_model.dart' as regular;
 
 class DYXRouter {
   static final Map<String, WidgetBuilder> routes = {
@@ -66,6 +66,12 @@ class DYXRouter {
       case DYXRegularAddPage.routeName: // 打卡添加
         return PageTransition(
             child: DYXRegularAddPage(),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.topCenter
+        );
+      case DYXRegularAddRecordPage.routeName: // 打卡添加的详细信息
+        return PageTransition(
+            child: DYXRegularAddRecordPage(settings.arguments as regular.Result),
             type: PageTransitionType.rightToLeft,
             alignment: Alignment.topCenter
         );
