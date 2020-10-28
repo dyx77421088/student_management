@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:student_management/ui/shared/image/image_cropper/image_cropper_utils.dart';
 
@@ -15,13 +16,13 @@ class DYXImagePickerUtils {
     return picker.getImage(source: ImageSource.gallery);
   }
   /// 从相机中获得图片并裁剪它
-  static Future<File> getCropperImageByCamera() async{
+  static Future<File> getCropperImageByCamera({CropStyle cropStyle}) async{
     var image = await getImageByCamera();
-    return DYXImageCropperUtils.cropImage(image.path);
+    return DYXImageCropperUtils.cropImage(image.path, cropStyle: cropStyle);
   }
   /// 从相册中获得图片并裁剪它
-  static Future<File> getCropperImageByGallery() async{
+  static Future<File> getCropperImageByGallery({CropStyle cropStyle}) async{
     var image = await getImageByGallery();
-    return DYXImageCropperUtils.cropImage(image?.path);
+    return DYXImageCropperUtils.cropImage(image?.path, cropStyle: cropStyle);
   }
 }

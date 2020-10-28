@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:student_management/core/utils/date_time_utils.dart';
 import 'package:student_management/ui/pages/personal/regular/regular_content.dart';
 import 'package:student_management/ui/pages/personal/regular/regular_target.dart';
+import 'package:student_management/ui/shared/date_picker/date_picker_utils.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
 
 import 'regular_add/regular_add.dart';
@@ -14,17 +16,23 @@ class DYXRegularPage extends StatefulWidget {
 
 class _DYXRegularPageState extends State<DYXRegularPage> {
   var _index = 0;
+  DateTime now = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('打卡'),
+        title: Text('打卡(${DYXDateTimeUtils.getNowDate(timeStamp: DYXDateTimeUtils.getNowTimeStamp(now: now))})'),
+        actions: [
+          IconButton(icon: Icon(DYXIcons.calendar), onPressed: (){
+            showCalendar(context);
+          })
+        ],
       ),
       body: IndexedStack(
         index: _index,
         children: [
-          DYXRegularContent(),
+          DYXRegularContent(now),
           DYXRegularTarget(),
         ],
       ),
@@ -54,6 +62,19 @@ class _DYXRegularPageState extends State<DYXRegularPage> {
           });
         },
       ),
+    );
+  }
+
+  /// 选择日期
+  void showCalendar(BuildContext context) {
+    DYXDatePickerUtils.showTime(
+      context: context,
+      initialDateTime: now,
+      onConfirm: (DateTime dateTime, List<int> selectedIndex) {
+        setState(() {
+          this.now = dateTime;
+        });
+      }
     );
   }
 }

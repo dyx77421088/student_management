@@ -13,7 +13,7 @@ import 'package:student_management/ui/pages/personal/regular/regular_add/regular
 
 /// 添加的界面
 class DYXRegularAddPage extends StatefulWidget {
-  static const String routeName = "DYXRegularAddPage";
+  static const String routeName = "/DYXRegularAddPage";
 
   @override
   _DYXRegularAddPageState createState() => _DYXRegularAddPageState();

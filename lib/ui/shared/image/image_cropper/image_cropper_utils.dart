@@ -6,12 +6,12 @@ import 'package:image_cropper/image_cropper.dart';
 
 class DYXImageCropperUtils {
   /// 裁剪图片
-  static Future<File> cropImage(String path, {AndroidUiSettings androidUiSettings}) async {
+  static Future<File> cropImage(String path, {AndroidUiSettings androidUiSettings, CropStyle cropStyle}) async {
     if (path == null)
       return null;
     File croppedFile = await ImageCropper.cropImage(
         sourcePath: path,
-        cropStyle: CropStyle.circle,
+        cropStyle: cropStyle??CropStyle.circle,
         aspectRatioPresets: Platform.isAndroid
             ? [
                 CropAspectRatioPreset.square,

@@ -1,4 +1,5 @@
 import 'package:date_format/date_format.dart';
+import 'package:flutter/cupertino.dart';
 
 class DYXDateTimeUtils {
   /// 时间戳（秒）转换成时间，自定义格式
@@ -12,8 +13,8 @@ class DYXDateTimeUtils {
   }
 
   /// 获得当前的时间戳(秒)
-  static int getNowTimeStamp() {
-    return (DateTime.now().millisecondsSinceEpoch / 1000).round();
+  static int getNowTimeStamp({DateTime now}) {
+    return ((now??DateTime.now()).millisecondsSinceEpoch / 1000).round();
   }
 
   /// 获得当前的日期
@@ -58,6 +59,20 @@ class DYXDateTimeUtils {
     DateTime now = timeStamp != null ? DateTime.fromMillisecondsSinceEpoch(timeStamp*1000)
         : DateTime.now();
     return getTimeStamp(DateTime(now.year, now.month, now.day+1));
+  }
+
+  static int toTime({int time}) {
+    DateTime t = time == null ? DateTime.now() : DateTime.fromMillisecondsSinceEpoch(time*1000);
+    DateTime t1 = DateTime(0, 0, 0, t.hour, t.minute, t.second, t.millisecond, t.microsecond);
+    return t1.millisecondsSinceEpoch;
+  }
+
+  /// 判断当前时间是否在一个范围内
+  static bool onTime({@required int startTime, @required int endTime}) {
+    int now = toTime();
+    int start = toTime(time: startTime);
+    int end = toTime(time: endTime);
+    return start <= now && now <= end;
   }
 
   /// 今天在这周里面吗

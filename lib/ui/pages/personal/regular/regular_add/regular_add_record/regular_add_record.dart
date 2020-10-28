@@ -7,7 +7,7 @@ import 'package:student_management/core/model/regular/regular_search_model.dart'
 import 'package:student_management/ui/shared/toast/toast.dart';
 
 class DYXRegularAddRecordPage extends StatefulWidget {
-  static const String routeName = "DYXRegularAddRecordPage";
+  static const String routeName = "/DYXRegularAddRecordPage";
   final Result regular;
   DYXRegularAddRecordPage(this.regular);
 

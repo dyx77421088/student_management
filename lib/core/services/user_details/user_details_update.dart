@@ -10,9 +10,10 @@ class DYXUserDetailsUpdate {
   }) async{
     var data = await DYXHttpRequest().request(
       "/userDetails/update",
-        headers: {"token": token},
-        method: "patch",
-        data: formData
+      headers: {"token": token},
+      method: "patch",
+      data: formData,
+
     );
     return data;
   }

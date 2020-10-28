@@ -12,6 +12,12 @@ import 'package:student_management/core/model/user/user_teacher_login_model.dart
 import 'package:student_management/core/model/user/user_parent_login_model.dart' as Parent;
 import 'package:student_management/core/services/login/user_request.dart';
 import 'package:student_management/core/utils/date_time_utils.dart';
+/// 角色信息
+enum DYXRole {
+  teacher, // 0
+  student, // 1
+  parent, // 2
+}
 /// 用户的一些信息的通知
 class DYXUserViewModel extends ChangeNotifier {
   static String staticToken;
@@ -133,6 +139,16 @@ class DYXUserViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// 角色信息
+  DYXRole toDYXRole(int role) {
+    switch(role) {
+      case 0: return DYXRole.teacher;
+      case 1: return DYXRole.student;
+      case 2: return DYXRole.parent;
+    }
+    return null;
+  }
+
   // 获得信息
   /// 真实姓名
   String get name => isLogin ? prefs.getString("name") : null;
@@ -148,6 +164,7 @@ class DYXUserViewModel extends ChangeNotifier {
   String get token => isLogin ? prefs.getString("token") : null;
   /// 角色
   int get role => isLogin ? prefs.getInt("role") : null;
+  DYXRole get dYXRole => isLogin ? toDYXRole(prefs.getInt('role')) : null;
   /// 用户id
   int get id => isLogin ? prefs.getInt("id") : null;
   /// qq
