@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management/core/extension/int_extension.dart';
 import 'package:student_management/core/model/regular/regular_search_model.dart';
-import 'package:student_management/core/model/regularCategory/regular_category_model.dart' as regularCategory;
+import 'package:student_management/core/model/regular_category/regular_category_model.dart' as regularCategory;
 import 'package:student_management/core/model/regular/regular_search_model.dart' as regular;
 import 'package:student_management/core/services/regular/regular_search.dart';
 import 'package:student_management/core/services/regular_category/regular_category.dart';

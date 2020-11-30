@@ -27,6 +27,7 @@ class DYXImageNetwork {
   /// 默认错误时显示的
   static Widget _defaultError(BuildContext context, String url, dynamic error) {
     print(error);
+
     return const Center(child: Icon(Icons.error));
   }
 

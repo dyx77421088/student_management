@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:student_management/ui/shared/progress/progress_utils.dart';
 import 'package:student_management/ui/shared/theme/my_colors.dart';
 
 /// 自定义的下拉刷新的模型
@@ -71,22 +72,21 @@ class _DYXEasyRefreshModelState extends State<DYXEasyRefreshModel> {
   Widget build(BuildContext context) {
     return EasyRefresh.custom(
         header: widget.header ?? BezierHourGlassHeader(backgroundColor: DYXColors.blue[50], color: DYXColors.blue),
-        // footer: widget.footer ?? BezierBounceFooter(backgroundColor: DYXColors.blue[50], color: DYXColors.blue),
         firstRefresh: true,
         firstRefreshWidget: buildFirstRefreshWidget(context),
         onRefresh: ()async{
+          // await Future.delayed(Duration(seconds: 2));
           if(widget.onRefresh != null) {
-            widget.onRefresh();
+            await widget.onRefresh();
           }
-          // widget.onRefresh ?? ()async{await Future.delayed(Duration(seconds: 2));}
         },
-        // onLoad: widget.onLoad ?? ()async{await Future.delayed(Duration(seconds: 2));},
         slivers: widget.slivers
     );
   }
-  
+
   /// 首次加载的界面
   Widget buildFirstRefreshWidget(BuildContext context) {
+    return DYXProgressDialog.progressDialog(context: context);
     return Container(
       width: double.infinity,
       height: double.infinity,

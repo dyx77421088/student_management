@@ -2,6 +2,7 @@ import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart
 import 'package:flutter/material.dart';
 
 typedef DateValueCallback(DateTime dateTime, List<int> selectedIndex);
+typedef DateVoidCallback();
 class DYXDatePickerUtils {
   /// 显示BottomSheet形式的日期时间选择器。
   ///
@@ -23,7 +24,8 @@ class DYXDatePickerUtils {
     DateTime maxDateTime,
     DateTime initialDateTime,
     DateValueCallback onConfirm,
-    String dateFormat,
+    DateVoidCallback onClose,
+    String dateFormat, // yyyy-MM-dd HH:mm:ss
     DateTimePickerLocale locale = DateTimePickerLocale.zh_cn
   }) {
     DatePicker.showDatePicker(
@@ -33,7 +35,9 @@ class DYXDatePickerUtils {
       maxDateTime: maxDateTime,
       initialDateTime: initialDateTime,
       onConfirm: onConfirm,
+      onClose: onClose,
       dateFormat: dateFormat,
+
     );
   }
 

@@ -81,7 +81,7 @@ class DYXRouter {
         );
       case DYXRegularContentEditPage.routeName: // 打卡添加的详细信息
         return PageTransition(
-            child: DYXRegularContentEditPage(settings.arguments as regularAddRecord.Result),
+            child: DYXRegularContentEditPage(settings.arguments as DYXRegularContentEditSetting),
             type: PageTransitionType.scale,
             alignment: Alignment.center
         );

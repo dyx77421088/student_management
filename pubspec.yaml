@@ -105,6 +105,22 @@ dependencies:
   flutter_staggered_animations: "^0.1.2"
 #  弹出菜单
   popup_menu: ^1.0.5
+#  进度条
+  liquid_progress_indicator: ^0.3.2
+#  通知
+  awesome_notifications: ^0.0.4+2
+#  调色板
+  palette_generator: ^0.2.3
+#  逐渐扫描图片
+  progressive_image: ^1.0.1
+#  字体
+  font_awesome_flutter: ^8.10.0
+#  数字监听器
+  numberpicker: ^1.2.1
+#  GIF对话框
+  giffy_dialog: ^1.8.0
+#  闹钟
+  nova_alarm_plugin: ^0.1.0
 
 dev_dependencies:
   flutter_test:
@@ -125,6 +141,9 @@ flutter:
   assets:
     - assets/images/
     - assets/flr/
+    - assets/launcher/
+    - assets/readme/
+    - assets/sounds/
 #    时间表需要添加的
     - packages/time_machine/data/cultures/cultures.bin
     - packages/time_machine/data/tzdb/tzdb.bin

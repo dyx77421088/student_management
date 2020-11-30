@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:student_management/core/model/regularCategory/regular_category_model.dart';
+import 'package:student_management/core/model/regular_category/regular_category_model.dart';
 import 'package:student_management/core/services/http_request.dart';
 
 class DYXRegularCategory {

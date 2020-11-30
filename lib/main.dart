@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management/core/view_model/count_down_view_model.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
+import 'package:student_management/ui/shared/notifications/awesome_notifications_utils.dart';
 import 'core/view_model/flare_teddy_view_model.dart';
 import 'ui/shared/theme/app_theme.dart';
 import 'ui/pages/main/main.dart';
@@ -13,7 +14,10 @@ import 'core/router/route.dart';
 import 'ui/shared/size_fit.dart';
 
 void main() {
+  //size 初始化
   DYXSizeFit.initialize();
+  // 通知初始化
+  DYXAwesomeNotificationsUtils.init();
   if (Platform.isAndroid) {
     // 透明状态栏
     SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
