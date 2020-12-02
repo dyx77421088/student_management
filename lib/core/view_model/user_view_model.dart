@@ -171,6 +171,8 @@ class DYXUserViewModel extends ChangeNotifier {
   String get qq => isLogin ? prefs.getString("qq") : null;
   /// email
   String get email => isLogin ? prefs.getString("email") : null;
+  /// dyxRole
+  DYXRole get dyxRole => isLogin ? toDYXRole(this.role) : null;
 
   // 用户详细信息
   /// 头像

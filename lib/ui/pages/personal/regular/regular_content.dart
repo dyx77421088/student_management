@@ -8,6 +8,7 @@ import 'package:student_management/core/extension/int_extension.dart';
 import 'package:student_management/core/utils/date_time_utils.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/pages/personal/regular/regular_content_edit/regulaar_content_edit.dart';
+import 'package:student_management/ui/shared/image/image_network.dart';
 import 'package:student_management/ui/shared/refresh/easy_refresh/my_easy_refresh_model.dart';
 import 'package:student_management/ui/shared/shimmer/shimmer_utils.dart';
 import 'package:student_management/ui/shared/sliver_sticky_header/sliver_sticky_header.dart';
@@ -150,7 +151,8 @@ class _DYXRegularContentState extends State<DYXRegularContent> {
       padding: EdgeInsets.all(5.px),
       child: Column(
         children: [
-          CircleAvatar(backgroundImage: NetworkImage(regularItem.regular.image),),
+          DYXImageNetwork.avatarNetwork(url: regularItem.regular.image),
+          // CircleAvatar(backgroundImage: NetworkImage(regularItem.regular.image),),
           SizedBox(height: 2.px,),
           Text(regularItem.regular.title),
           SizedBox(height: 2.px,),

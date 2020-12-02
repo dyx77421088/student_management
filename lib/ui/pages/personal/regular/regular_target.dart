@@ -6,6 +6,7 @@ import 'package:student_management/core/services/regualr_clock/regular_clock.dar
 import 'package:student_management/core/services/regular_add_record/regular_add_record.dart';
 import 'package:student_management/core/utils/date_time_utils.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
+import 'package:student_management/ui/shared/image/image_network.dart';
 import 'package:student_management/ui/shared/refresh/easy_refresh/my_easy_refresh_model.dart';
 import 'package:student_management/ui/shared/shimmer/shimmer_utils.dart';
 import 'package:student_management/ui/shared/sliver_sticky_header/sliver_sticky_header.dart';
@@ -44,7 +45,8 @@ class _DYXRegularTargetState extends State<DYXRegularTarget> {
           title: element.regular.title,
           titleWidget: Row(
             children: [
-              CircleAvatar(backgroundImage: NetworkImage(element.regular.image),),
+              DYXImageNetwork.avatarNetwork(url: element.regular.image),
+              // CircleAvatar(backgroundImage: NetworkImage(element.regular.image),),
               SizedBox(width: 10.px,),
               Text(element.regular.title, style: TextStyle(color: Colors.white),),
 

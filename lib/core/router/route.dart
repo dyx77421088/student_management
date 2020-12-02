@@ -3,6 +3,8 @@ import 'package:page_transition/page_transition.dart';
 import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/personal/details/details.dart';
 import 'package:student_management/ui/pages/personal/details/widget/details_update_personal_signature.dart';
+import 'package:student_management/ui/pages/personal/news/news.dart';
+import 'package:student_management/ui/pages/personal/notice/notice.dart';
 import 'package:student_management/ui/pages/personal/regular/regular.dart';
 import 'package:student_management/ui/pages/personal/regular/regular_add/regular_add_record/regular_add_record.dart';
 import 'package:student_management/ui/pages/personal/regular/regular_content_edit/regulaar_content_edit.dart';
@@ -11,7 +13,7 @@ import 'package:student_management/ui/pages/personal/setting/setting.dart';
 import 'package:student_management/ui/pages/personal/setting/user_security_center/user_security_center.dart';
 import 'package:student_management/ui/pages/personal/timetable/time_table.dart';
 import 'package:student_management/core/model/regular/regular_search_model.dart' as regular;
-import 'package:student_management/core/model/regular_add_record/regular_add_record_model.dart' as regularAddRecord;
+import 'package:student_management/ui/pages/personal/work/work.dart';
 import 'package:student_management/ui/shared/image/image_show.dart';
 
 
@@ -90,6 +92,24 @@ class DYXRouter {
             child: DYXImageShowPage(settings.arguments as ImageProvider),
             type: PageTransitionType.fade,
             alignment: Alignment.topCenter
+        );
+      case DYXNoticePage.routeName: // 通知显示的效果
+        return PageTransition(
+            child: DYXNoticePage(),
+            type: PageTransitionType.scale,
+            alignment: Alignment.center
+        );
+      case DYXWorkPage.routeName: // 作业显示的效果
+        return PageTransition(
+            child: DYXWorkPage(),
+            type: PageTransitionType.scale,
+            alignment: Alignment.center
+        );
+      case DYXNewsPage.routeName: // 消息显示的效果
+        return PageTransition(
+            child: DYXNewsPage(),
+            type: PageTransitionType.scale,
+            alignment: Alignment.center
         );
       default:
         return null;

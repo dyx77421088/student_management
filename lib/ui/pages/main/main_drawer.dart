@@ -7,6 +7,7 @@ import 'package:student_management/core/router/route_animation.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/personal/details/details.dart';
+import 'package:student_management/ui/pages/personal/news/news.dart';
 import 'package:student_management/ui/shared/dialog/dialog.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
@@ -22,12 +23,23 @@ class DYXMainDrawer extends StatelessWidget {
           builder: (ctx, userVM, child)=>Column(
             children: [
               buildHeaderView(context, userVM),
+              buildNews(context, userVM),
               buildExit(context, userVM),
             ],
           ),
         ),
       );
   }
+
+  /// 新的消息
+  buildNews(BuildContext context, userVM) => buildListTile(
+      context,
+      Icon(DYXIcons.wallet),
+      "消息",
+      () {
+        Navigator.pushNamed(context, DYXNewsPage.routeName);
+      }
+  );
 
   /// 退出
   Widget buildExit(BuildContext context, DYXUserViewModel userVM) {

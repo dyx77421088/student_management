@@ -57,6 +57,9 @@ class DYXIcons {
   /// 钱包
   static const wallet = AntDesign.wallet;
 
+  /// 通知
+  static const notification = AntDesign.notification;
+
   /// 向右边的图片
   static const chevron_right = Entypo.chevron_right;
 

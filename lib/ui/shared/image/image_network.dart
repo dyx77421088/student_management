@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
+/// cached 快速加载图片
 class DYXImageNetwork {
   static Widget network({@required String url,
     PlaceholderWidgetBuilder placeholder,

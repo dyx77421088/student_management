@@ -29,8 +29,8 @@ class _DYXMainScreenState extends State<DYXMainPage> {
     super.initState();
     pages = [
       DYXHomePage(_innerDrawerKey),
-      DYXPage1(),
-      DYXPage2(),
+      // DYXPage1(),
+      // DYXPage2(),
       DYXPersonalPage(),
     ];
   }
@@ -48,12 +48,15 @@ class _DYXMainScreenState extends State<DYXMainPage> {
       borderRadius: 30,
       backgroundDecoration: BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomLeft,
+          begin: Alignment.topLeft,
+          end: Alignment. bottomRight,
           //stops: [0.1, 0.5,0.5, 0.7, 0.9],
           colors: [
-            DYXColors.blue[50],
-            DYXColors.blue[800],
+            DYXColors.blue[200],
+            DYXColors.blue[100],
+            DYXColors.blue[300],
+            DYXColors.blue[200],
+            DYXColors.blue[400],
           ],
         ),
       ),
@@ -76,18 +79,18 @@ class _DYXMainScreenState extends State<DYXMainPage> {
         ),
       ),
       leftChild: DYXMainDrawer(),
-      rightChild: Column(
-        children: [
-          Consumer<DYXUserViewModel>(
-              builder: (ctx, userVM, child) => Material(
-                  color: Colors.transparent,
-                  child: Container(
-                    width: double.infinity,
-                    height: 960,
-                    child: Center(child: FlutterLogo(size: 100)),
-                  ))),
-        ],
-      ),
+      // rightChild: Column(
+      //   children: [
+      //     Consumer<DYXUserViewModel>(
+      //         builder: (ctx, userVM, child) => Material(
+      //             color: Colors.transparent,
+      //             child: Container(
+      //               width: double.infinity,
+      //               height: 960,
+      //               child: Center(child: FlutterLogo(size: 100)),
+      //             ))),
+      //   ],
+      // ),
     );
   }
 }
