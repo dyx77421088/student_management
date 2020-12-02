@@ -57,8 +57,8 @@ class Result {
   String reminderTimeStr;
   String startTimeStr;
   String endTimeStr;
-  DateTime startDateStr;
-  DateTime endDateStr;
+  String startDateStr;
+  String endDateStr;
   String describe;
   int reminderTime;
   int startTime;
@@ -74,8 +74,8 @@ class Result {
     reminderTimeStr: json["reminder_time_str"],
     startTimeStr: json["start_time_str"],
     endTimeStr: json["end_time_str"],
-    startDateStr: DateTime.parse(json["start_date_str"]),
-    endDateStr: DateTime.parse(json["end_date_str"]),
+    startDateStr: json["start_date_str"],
+    endDateStr: json["end_date_str"],
     describe: json["describe"],
     reminderTime: json["reminder_time"],
     startTime: json["start_time"],
@@ -92,8 +92,8 @@ class Result {
     "reminder_time_str": reminderTimeStr,
     "start_time_str": startTimeStr,
     "end_time_str": endTimeStr,
-    "start_date_str": startDateStr.toIso8601String(),
-    "end_date_str": endDateStr.toIso8601String(),
+    "start_date_str": startDateStr,
+    "end_date_str": endDateStr,
     "describe": describe,
     "reminder_time": reminderTime,
     "start_time": startTime,

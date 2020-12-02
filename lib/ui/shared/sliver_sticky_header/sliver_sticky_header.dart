@@ -7,16 +7,23 @@ import 'package:student_management/ui/shared/theme/my_colors.dart';
 class DYXSliverStickyHeader extends StatefulWidget {
   final String title;
   final Widget slivers;
+  final Widget titleWidget;
+  final bool isOpen;
 
 
-  DYXSliverStickyHeader({@required this.title, @required this.slivers});
+  DYXSliverStickyHeader({@required this.title, @required this.slivers, this.titleWidget, this.isOpen = false});
 
   @override
   _DYXSliverStickyHeaderState createState() => _DYXSliverStickyHeaderState();
 }
 
 class _DYXSliverStickyHeaderState extends State<DYXSliverStickyHeader> {
-  bool isOpen = true;
+  bool isOpen;
+  @override
+  void initState() {
+    super.initState();
+    isOpen = widget.isOpen;
+  }
   @override
   Widget build(BuildContext context) {
     return SliverStickyHeader.builder(
@@ -27,7 +34,7 @@ class _DYXSliverStickyHeaderState extends State<DYXSliverStickyHeader> {
               .withOpacity(1.0 - state.scrollPercentage),
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           alignment: Alignment.centerLeft,
-          child: Text(
+          child: widget.titleWidget ?? Text(
             '${widget.title}',
             style: const TextStyle(color: Colors.white),
           ),

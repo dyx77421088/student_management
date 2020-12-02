@@ -78,6 +78,7 @@ class _DYXRegularContentState extends State<DYXRegularContent> {
     /// 进行中
     var goOn = filterGoOn(data);
     stickyHeaderList.add(DYXSliverStickyHeader(
+      isOpen: true,
       slivers: SliverGrid.count(
         crossAxisCount: 3,
         crossAxisSpacing: 0.9,
@@ -155,7 +156,9 @@ class _DYXRegularContentState extends State<DYXRegularContent> {
           SizedBox(height: 2.px,),
           Text("${DYXDateTimeUtils.getNowTime(timeStamp: regularItem.startTime)}~${DYXDateTimeUtils.getNowTime(timeStamp: regularItem.endTime)}"),
           SizedBox(height: 2.px,),
-          DYXShimmer(child: Text("已坚持打卡${getDay(regularItem.id)}天"))
+          conduct == DYXRegularStatus.goOn ?
+            DYXShimmer(child: Text("已坚持打卡${getDay(regularItem.id)}天")) :
+            Text("已坚持打卡${getDay(regularItem.id)}天")
         ],
       ),
     ),
