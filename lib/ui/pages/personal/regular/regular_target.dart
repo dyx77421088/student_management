@@ -41,11 +41,12 @@ class _DYXRegularTargetState extends State<DYXRegularTarget> {
   List<Widget> getData(DYXUserViewModel userVM) {
     List<Widget> slivers = [];
     data.results.forEach((element) {
+      if(element.regular == null) return;
       slivers.add(DYXSliverStickyHeader(
-          title: element.regular.title,
+          title: element.regular?.title,
           titleWidget: Row(
             children: [
-              DYXImageNetwork.avatarNetwork(url: element.regular.image),
+              DYXImageNetwork.avatarNetwork(url: element.regular?.image),
               // CircleAvatar(backgroundImage: NetworkImage(element.regular.image),),
               SizedBox(width: 10.px,),
               Text(element.regular.title, style: TextStyle(color: Colors.white),),

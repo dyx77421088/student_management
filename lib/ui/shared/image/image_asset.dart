@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:student_management/core/extension/int_extension.dart';
 
 class DYXImageAsset extends Image{
-  DYXImageAsset(String name):
-      super.asset("assets/images/$name", color: Colors.black);
+  DYXImageAsset(String name, {color=Colors.black}):
+      super.asset("assets/images/$name", color: color);
 
   DYXImageAsset.png(String name):
         super.asset("assets/images/$name.png");

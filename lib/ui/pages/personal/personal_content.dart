@@ -78,7 +78,7 @@ class DYXPersonalContent extends StatelessWidget {
           SizedBox(height: 10.px),
           DYXSettingItem(
             title: "消息",
-            leading:  Icon(DYXIcons.wallet, color: DYXColors.navBar[100],),
+            leading:  Icon(DYXIcons.news, color: DYXColors.navBar[100],),
             onPressed: () {
               Navigator.pushNamed(context, DYXNewsPage.routeName);
             }

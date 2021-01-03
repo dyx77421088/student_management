@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/pages/main/main_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:student_management/ui/pages/personal/news/news.dart';
 import 'package:student_management/ui/shared/inner_drawer/inner_drawer_utils.dart';
 import 'package:student_management/ui/shared/nav_bar/nav_bar.dart';
 import 'package:student_management/ui/shared/theme/my_colors.dart';
@@ -29,7 +30,8 @@ class _DYXMainScreenState extends State<DYXMainPage> {
     super.initState();
     pages = [
       DYXHomePage(_innerDrawerKey),
-      // DYXPage1(),
+      DYXNewsPage(),
+      DYXPage1(),
       // DYXPage2(),
       DYXPersonalPage(),
     ];

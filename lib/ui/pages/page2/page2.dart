@@ -21,7 +21,9 @@ class _DYXPage2State extends State<DYXPage2> {
             children: [
               RaisedButton(
                 child: Text("发送通知"),
-                onPressed: () {DYXAwesomeNotificationsUtils.sendNotifications(id: ++id);},
+                onPressed: () {
+                  // DYXAwesomeNotificationsUtils.sendNotifications(id: ++id);
+                  },
               ),
               RaisedButton(
                 child: Text("添加闹钟"),

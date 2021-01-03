@@ -34,7 +34,7 @@ class DYXMainDrawer extends StatelessWidget {
   /// 新的消息
   buildNews(BuildContext context, userVM) => buildListTile(
       context,
-      Icon(DYXIcons.wallet),
+      Icon(DYXIcons.news),
       "消息",
       () {
         Navigator.pushNamed(context, DYXNewsPage.routeName);

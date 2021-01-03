@@ -52,6 +52,7 @@ class DYXRegularAddRecordServices {
         headers: {"token": DYXUserViewModel.staticToken},
         data: data
     );
+    print("我是$d");
     return DYXRegularAddRecordSearchModel.fromJson(d);
   }
 }

@@ -39,6 +39,9 @@ class DYXIcons {
   /// 搜索
   static const search = AntDesign.search1;
 
+  /// 铃（消息）
+  static const news = AntDesign.bells;
+
   /// 帽子
   static const graduation = Entypo.graduation_cap;
 
@@ -71,6 +74,9 @@ class DYXIcons {
 
   /// 考试
   static const exam = Entypo.open_book;
+
+  /// 邮箱
+  static const email = MaterialCommunityIcons.email;
 
   /// 指纹
   static const fingerprint = Entypo.fingerprint;

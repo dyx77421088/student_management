@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
+import 'package:student_management/ui/pages/personal/news/news.dart';
+import 'package:student_management/ui/shared/icon/icons.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
 
 import 'home_content.dart';
@@ -32,6 +34,14 @@ class _DYXHomePageState extends State<DYXHomePage> {
             widget.innerDrawerKey.currentState.toggle();
           },
         ),
+        actions: [
+          IconButton(
+              icon: Icon(DYXIcons.email, color: Colors.white,),
+              onPressed: (){
+                Navigator.pushNamed(context, DYXNewsPage.routeName);
+              }
+          )
+        ],
       ),
       body: DYXHomeContent(),
     );

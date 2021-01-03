@@ -3,7 +3,11 @@ import 'package:page_transition/page_transition.dart';
 import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/personal/details/details.dart';
 import 'package:student_management/ui/pages/personal/details/widget/details_update_personal_signature.dart';
+import 'package:student_management/ui/pages/personal/news/class_notice/class_notice.dart';
+import 'package:student_management/ui/pages/personal/news/class_work/class_work.dart';
 import 'package:student_management/ui/pages/personal/news/news.dart';
+import 'package:student_management/ui/pages/personal/news/reply/reply.dart';
+import 'package:student_management/ui/pages/personal/news/system_notice/system_notice.dart';
 import 'package:student_management/ui/pages/personal/notice/notice.dart';
 import 'package:student_management/ui/pages/personal/regular/regular.dart';
 import 'package:student_management/ui/pages/personal/regular/regular_add/regular_add_record/regular_add_record.dart';
@@ -108,7 +112,31 @@ class DYXRouter {
       case DYXNewsPage.routeName: // 消息显示的效果
         return PageTransition(
             child: DYXNewsPage(),
-            type: PageTransitionType.scale,
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center
+        );
+      case DYXReplyPage.routeName: // 回复消息的显示的效果
+        return PageTransition(
+            child: DYXReplyPage(),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center
+        );
+      case DYXClassNoticePage.routeName: // 班级通知的显示的效果
+        return PageTransition(
+            child: DYXClassNoticePage(),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center
+        );
+      case DYXClassWorkPage.routeName: // 班级作业的显示的效果
+        return PageTransition(
+            child: DYXClassWorkPage(),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center
+        );
+      case DYXSystemNoticePage.routeName: // 系统通知的显示的效果
+        return PageTransition(
+            child: DYXSystemNoticePage(),
+            type: PageTransitionType.rightToLeft,
             alignment: Alignment.center
         );
       default:

@@ -69,7 +69,7 @@ class Result {
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     id: json["id"],
-    regular: Regular.fromJson(json["regular"]),
+    regular: json["regular"]==null?null:Regular.fromJson(json["regular"]),
     userId: json["user_id"],
     reminderTimeStr: json["reminder_time_str"],
     startTimeStr: json["start_time_str"],
