@@ -108,7 +108,7 @@ dependencies:
 #  进度条
   liquid_progress_indicator: ^0.3.2
 #  通知
-#  awesome_notifications: ^0.0.4+2
+  awesome_notifications: ^0.0.4+2
 #  调色板
   palette_generator: ^0.2.3
 #  逐渐扫描图片

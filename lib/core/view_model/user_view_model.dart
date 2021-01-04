@@ -13,6 +13,8 @@ import 'package:student_management/core/model/user/user_parent_login_model.dart'
 import 'package:student_management/core/services/config.dart';
 import 'package:student_management/core/services/login/user_request.dart';
 import 'package:student_management/core/utils/date_time_utils.dart';
+import 'package:student_management/ui/shared/notifications/awesome_notifications_utils.dart';
+import 'package:student_management/ui/shared/toast/toast.dart';
 
 import 'package:web_socket_channel/io.dart';
 
@@ -72,6 +74,8 @@ class DYXUserViewModel extends ChangeNotifier {
       _notificationChannel = IOWebSocketChannel.connect('ws://${HttpConfig.IP}:${HttpConfig.port}/ws/notice/$token')
         ..stream.forEach((e) {
           print(e);
+          DYXToast.showToast(e);
+          DYXAwesomeNotificationsUtils.sendNotifications(id: 1, title:"收到班级作业", body: "hhhhh");
         });
     }
   }

@@ -57,7 +57,7 @@ class _DYXWorkPageState extends State<DYXWorkPage> {
           },
         )
       ],),
-      body: DYXWorkContent(titleController, contentController,d),
+      body: SingleChildScrollView(child: DYXWorkContent(titleController, contentController,d)),
     );
   }
 

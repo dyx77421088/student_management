@@ -9,7 +9,7 @@ class DYXDateTimeUtils {
 
   /// 时间戳（秒）转换成时间
   static String timeStampToStr(int timeStamp) {
-    return timeStampFormatToStr(timeStamp, [yyyy, '-', mm, '-', dd, ' ', HH, ':', nn, ':', ss]);
+    return timeStampFormatToStr(timeStamp, [yyyy, '-', mm, '-', dd, ' ', HH, ':', mm, ':', ss]);
   }
 
   /// 获得当前的时间戳(秒)
@@ -24,7 +24,7 @@ class DYXDateTimeUtils {
 
   /// 获得当前的时间
   static String getNowTime({int timeStamp}) {
-    return timeStampFormatToStr(timeStamp??getNowTimeStamp(), [HH, ':', nn]);
+    return timeStampFormatToStr(timeStamp??getNowTimeStamp(), [HH, ':', mm]);
   }
   
   /// dateTime 转换成字符串（日期）
@@ -38,7 +38,7 @@ class DYXDateTimeUtils {
   /// dateTime 转换成字符串 （时间）
   static String dateTimeToTimeStr(
       DateTime dateTime, 
-      {List<String> format = const [HH, ':', nn]}
+      {List<String> format = const [HH, ':', mm]}
     ) {
     return formatDate(dateTime, format);
   }
@@ -86,5 +86,13 @@ class DYXDateTimeUtils {
   static int dateTimeToTimeStamp({@required DateTime date, @required DateTime time}) {
     DateTime now = new DateTime(date.year, date.month, date.day, time.hour, time.minute, time.second);
     return now.millisecondsSinceEpoch ~/ 1000;
+  }
+
+  /// 日期和时间相结合返回时间(yyyy年MM月dd日 HH:mm)
+  static String dateTimeToDate({@required int timeStamp}) {
+    return timeStampFormatToStr(
+      timeStamp,
+      [yyyy, '年', mm, '月', dd, '日 ', HH, '时', mm, '分']
+    );
   }
 }

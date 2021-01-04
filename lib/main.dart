@@ -17,7 +17,7 @@ void main() {
   //size 初始化
   DYXSizeFit.initialize();
   // 通知初始化
-  // DYXAwesomeNotificationsUtils.init();
+  DYXAwesomeNotificationsUtils.init();
   if (Platform.isAndroid) {
     // 透明状态栏
     SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);

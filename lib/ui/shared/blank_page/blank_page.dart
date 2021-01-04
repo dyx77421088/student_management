@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_management/ui/shared/image/image_asset.dart';
 import 'package:student_management/core/extension/int_extension.dart';
+import 'package:student_management/ui/shared/size_fit.dart';
 /// 空白页显示
 enum DYXBlankType {
   tuzi, // 兔子
@@ -17,14 +18,17 @@ class DYXBlankPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          image ?? DYXImageAsset(toImagePath(imageType), color: null,),
-          SizedBox(height: 10.px,),
-          Text(text, style: TextStyle(color: Colors.black, fontSize: 16.px),)
-        ],
+    return Container(
+      height: DYXSizeFit.maxHeight() - 200.px,
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            image ?? DYXImageAsset(toImagePath(imageType), color: null,),
+            SizedBox(height: 10.px,),
+            Text(text, style: TextStyle(color: Colors.black, fontSize: 16.px),)
+          ],
+        ),
       ),
     );
   }

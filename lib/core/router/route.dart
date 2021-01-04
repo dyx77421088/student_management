@@ -15,8 +15,10 @@ import 'package:student_management/ui/pages/personal/regular/regular_add/regular
 import 'package:student_management/ui/pages/personal/regular/regular_content_edit/regulaar_content_edit.dart';
 import 'package:student_management/ui/pages/personal/setting/setting.dart';
 import 'package:student_management/ui/pages/personal/setting/user_security_center/user_security_center.dart';
+import 'package:student_management/ui/pages/personal/single_work_look/single_work_look.dart';
 import 'package:student_management/ui/pages/personal/timetable/time_table.dart';
 import 'package:student_management/core/model/regular/regular_search_model.dart' as regular;
+import 'package:student_management/core/model/work/work_search.dart' as work;
 import 'package:student_management/ui/pages/personal/work/work.dart';
 import 'package:student_management/ui/pages/personal/work_look/work_look.dart';
 import 'package:student_management/ui/shared/image/image_show.dart';
@@ -143,6 +145,12 @@ class DYXRouter {
       case DYXSystemNoticePage.routeName: // 系统通知的显示的效果
         return PageTransition(
             child: DYXSystemNoticePage(),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center
+        );
+      case DYXSingleWorkLookPage.routeName: // 单个work查看
+        return PageTransition(
+            child: DYXSingleWorkLookPage(settings.arguments as work.Result),
             type: PageTransitionType.rightToLeft,
             alignment: Alignment.center
         );

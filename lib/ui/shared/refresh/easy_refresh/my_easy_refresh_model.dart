@@ -80,6 +80,8 @@ class _DYXEasyRefreshModelState extends State<DYXEasyRefreshModel> {
             await widget.onRefresh();
           }
         },
+        onLoad: widget.onLoad,
+        footer: widget.footer ?? BezierBounceFooter(backgroundColor: DYXColors.blue[50], color: DYXColors.blue),
         slivers: widget.slivers
     );
   }

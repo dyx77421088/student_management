@@ -34,6 +34,14 @@ class DYXSizeFit {
   static double setRpx(double size) {
     return rpx * size;
   }
+  /// 获得最大高度
+  static double maxHeight() {
+    return screenHeight;
+  }
+  /// 获得最大宽度
+  static double maxWidth() {
+    return screenWidth;
+  }
 
   static double setPx(double size) {
     return px * size;

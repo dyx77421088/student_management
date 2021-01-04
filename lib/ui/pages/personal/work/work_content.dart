@@ -67,7 +67,7 @@ class _DYXWorkContentState extends State<DYXWorkContent> {
       child: TextFormField(
           controller: widget.contentController,
           maxLines: 12,
-          maxLength: 300,
+          maxLength: 250,
           autofocus: true,
           decoration: InputDecoration(
               counterText: "",
@@ -101,7 +101,7 @@ class _DYXWorkContentState extends State<DYXWorkContent> {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.px)),
             suffixIcon: DropdownButton(
               items: [
-                DropdownMenuItem(child: Text("语文"), onTap: (){}, value: DYXCourse.yingyu,),
+                DropdownMenuItem(child: Text("语文"), onTap: (){}, value: DYXCourse.yuwen,),
                 DropdownMenuItem(child: Text("英语"), onTap: (){}, value: DYXCourse.yingyu,),
                 DropdownMenuItem(child: Text("数学"), onTap: (){}, value: DYXCourse.shuxue,),
                 DropdownMenuItem(child: Text("体育"), onTap: (){}, value: DYXCourse.tiyu,),
