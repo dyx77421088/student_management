@@ -142,6 +142,7 @@ class _DYXUserSecurityCenterContentState extends State<DYXUserSecurityCenterCont
   }
 
   String getEmail(String email) {
+    if(email.lastIndexOf("@") == -1) return "????";
     return email.replaceRange(3, email.lastIndexOf("@"), "****");
   }
 

@@ -17,10 +17,13 @@ enum DYXRole {
   teacher, // 0
   student, // 1
   parent, // 2
+  instructor, // 辅导员
 }
 /// 用户的一些信息的通知
 class DYXUserViewModel extends ChangeNotifier {
   static String staticToken;
+  static int teacherId;
+
   DYXUserLoginModel _user;
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   SharedPreferences prefs;
@@ -119,6 +122,8 @@ class DYXUserViewModel extends ChangeNotifier {
         }
       }
     } else if(roleInfo is Teacher.RoleInfo) { // 老师角色的信息
+      prefs.setInt("teacherId", roleInfo.id);
+      teacherId = roleInfo.id; // 老师的id
       prefs.setString("title", roleInfo.title);
       prefs.setString("identity", roleInfo.identity);
       var school = roleInfo.school;
@@ -145,6 +150,7 @@ class DYXUserViewModel extends ChangeNotifier {
       case 0: return DYXRole.teacher;
       case 1: return DYXRole.student;
       case 2: return DYXRole.parent;
+      case 3: return DYXRole.instructor;
     }
     return null;
   }
@@ -158,6 +164,8 @@ class DYXUserViewModel extends ChangeNotifier {
   String get schoolName => isLogin ? prefs.getString("schoolName") : null;
   /// 班级
   String get className => isLogin ? prefs.getString("className") : null;
+  /// 班级ID
+  // int get classId => isLogin ? prefs.getInt("classId") : null;
   /// 手机号
   String get phoneNumber => isLogin ? prefs.getString("phoneNumber") : null;
   /// token

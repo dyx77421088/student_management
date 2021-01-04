@@ -30,8 +30,8 @@ class _DYXMainScreenState extends State<DYXMainPage> {
     super.initState();
     pages = [
       DYXHomePage(_innerDrawerKey),
-      DYXNewsPage(),
-      DYXPage1(),
+      // DYXNewsPage(),
+      // DYXPage1(),
       // DYXPage2(),
       DYXPersonalPage(),
     ];

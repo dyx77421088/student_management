@@ -81,4 +81,10 @@ class DYXDateTimeUtils {
     print(weekday);
     return week.contains(weekday);
   }
+
+  /// 日期和时间相结合返回时间戳(秒)
+  static int dateTimeToTimeStamp({@required DateTime date, @required DateTime time}) {
+    DateTime now = new DateTime(date.year, date.month, date.day, time.hour, time.minute, time.second);
+    return now.millisecondsSinceEpoch ~/ 1000;
+  }
 }

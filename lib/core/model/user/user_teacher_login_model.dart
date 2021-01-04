@@ -42,16 +42,18 @@ class DYXUserTeacherLoginModel extends DYXUserLoginModel{
 }
 class RoleInfo extends DYXUserLoginRoleInfo{
   RoleInfo({
+    this.id,
     this.title,
     this.identity,
     this.school,
   });
-
+  int id;
   String title;
   String identity;
   DYXSchoolToJsonModel school;
 
   factory RoleInfo.fromJson(Map<String, dynamic> json) => RoleInfo(
+    id: json["id"],
     title: json["title"],
     identity: json["identity"],
     school: json["school"] != null ? DYXSchoolToJsonModel.fromJson(json["school"]) : null,

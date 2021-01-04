@@ -9,7 +9,7 @@ class DYXSystemNoticePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("系统消息"),),
       body: DYXBlankPage(
-        imageType: DYXBlankType.pkq,
+        imageType: DYXBlankType.tuzi,
       ),
     );
   }

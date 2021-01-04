@@ -64,6 +64,7 @@ class _DYXRegularContentState extends State<DYXRegularContent> {
       && DYXDateTimeUtils.getNowTimeStamp(now: widget.now) <= DYXDateTimeUtils.ceilTime(timeStamp: e.endDate)
       && DYXDateTimeUtils.onWeek(e.week)
     ).toList();
+    print('data=${data.length}');
     // 班级的(只有学生添加)
     // if (userVM.dYXRole == DYXRole.student) {
     //   stickyHeaderList.add(DYXSliverStickyHeader(
@@ -74,6 +75,16 @@ class _DYXRegularContentState extends State<DYXRegularContent> {
     //     ), title: "班级",
     //   ));
     // }
+
+    var clazz = filterClass(data);
+    stickyHeaderList.add(DYXSliverStickyHeader(
+      isOpen: true,
+      slivers: SliverGrid.count(
+        crossAxisCount: 3,
+        crossAxisSpacing: 0.9,
+        children: clazz.map((e) => buildItem(regularItem: e, conduct: DYXRegularStatus.goOn)).toList(),
+      ), title: "班级(${clazz.length})",
+    ));
 
     // 个人
     /// 进行中

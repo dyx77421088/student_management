@@ -52,11 +52,12 @@ class _DYXRegularContentEditState extends State<DYXRegularContentEditPage> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.editSetting.readOnly)
+      moodController.text = widget.editSetting.clock.mood;
     return Scaffold(
       appBar: AppBar(
         title: Text("打卡${widget.editSetting.readOnly?"(${isToDay()?"今日已签到":"查看"})":""}"),
@@ -83,16 +84,16 @@ class _DYXRegularContentEditState extends State<DYXRegularContentEditPage> {
             SizedBox(height: 10.px,),
             Row(
               children: [
-                  widget.editSetting.clock?.image != null ?
-                  buildOnlyReadImage(widget.editSetting.clock.image)
-                  : (
-                      imageFile == null ?
-                      GestureDetector(
-                        child: Icon(DYXIcons.add_image, size: 40.px,),
-                        onTap: widget.editSetting.readOnly ? null : showSelectImageDialog,
-                      )
-                      : buildImage(context)
+                widget.editSetting.clock?.image != null ?
+                buildOnlyReadImage(widget.editSetting.clock.image)
+                : (
+                    imageFile == null ?
+                    GestureDetector(
+                      child: Icon(DYXIcons.add_image, size: 40.px,),
+                      onTap: widget.editSetting.readOnly ? null : showSelectImageDialog,
                     )
+                    : buildImage(context)
+                  )
               ],
             )
           ],

@@ -18,6 +18,7 @@ import 'package:student_management/ui/pages/personal/setting/user_security_cente
 import 'package:student_management/ui/pages/personal/timetable/time_table.dart';
 import 'package:student_management/core/model/regular/regular_search_model.dart' as regular;
 import 'package:student_management/ui/pages/personal/work/work.dart';
+import 'package:student_management/ui/pages/personal/work_look/work_look.dart';
 import 'package:student_management/ui/shared/image/image_show.dart';
 
 
@@ -106,6 +107,12 @@ class DYXRouter {
       case DYXWorkPage.routeName: // 作业显示的效果
         return PageTransition(
             child: DYXWorkPage(),
+            type: PageTransitionType.scale,
+            alignment: Alignment.center
+        );
+      case DYXWorkLookPage.routeName: // 作业查看的效果
+        return PageTransition(
+            child: DYXWorkLookPage(),
             type: PageTransitionType.scale,
             alignment: Alignment.center
         );

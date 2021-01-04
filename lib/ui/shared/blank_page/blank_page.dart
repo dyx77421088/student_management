@@ -12,7 +12,7 @@ class DYXBlankPage extends StatelessWidget {
   final DYXBlankType imageType;
   final ImageProvider image;
 
-  DYXBlankPage({this.text="什么都还没有...", this.imageType=DYXBlankType.boy, this.image})
+  DYXBlankPage({this.text="什么都还没有...", this.imageType=DYXBlankType.tuzi, this.image})
     :assert(imageType!=null || image!=null);
 
   @override

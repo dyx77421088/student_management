@@ -11,16 +11,16 @@ final List<GButton> items = [
     icon: DYXIcons.home,
     backgroundColor: DYXColors.navBar[100],
   ),
-  GButton(
-    text: "消息",
-    icon: DYXIcons.news,
-    backgroundColor: DYXColors.navBar[200],
-  ),
-  GButton(
-    text: "未知",
-    icon: Icons.home,
-    backgroundColor: DYXColors.navBar[300],
-  ),
+  // GButton(
+  //   text: "消息",
+  //   icon: DYXIcons.news,
+  //   backgroundColor: DYXColors.navBar[200],
+  // ),
+  // GButton(
+  //   text: "未知",
+  //   icon: Icons.home,
+  //   backgroundColor: DYXColors.navBar[300],
+  // ),
   GButton(
     text: "个人中心",
     icon: DYXIcons.user,

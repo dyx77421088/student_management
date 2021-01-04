@@ -10,6 +10,7 @@ import 'package:student_management/ui/pages/personal/notice/notice.dart';
 import 'package:student_management/ui/pages/personal/regular/regular.dart';
 import 'package:student_management/ui/pages/personal/timetable/time_table.dart';
 import 'package:student_management/ui/pages/personal/work/work.dart';
+import 'package:student_management/ui/pages/personal/work_look/work_look.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
 import 'package:student_management/ui/shared/theme/my_colors.dart';
@@ -47,7 +48,8 @@ class DYXPersonalContent extends StatelessWidget {
               title: "课表",
               leading:  Icon(DYXIcons.calendar, color: DYXColors.navBar[50],),
               onPressed: () {
-                Navigator.pushNamed(context, DYXTimeTablePage.routeName);
+                userVM.isLogin ? Navigator.pushNamed(context, DYXTimeTablePage.routeName) :
+                Navigator.pushNamed(context, DYXLoginPage.routeName);
               }
           ),
           // DYXSettingItem(
@@ -80,21 +82,29 @@ class DYXPersonalContent extends StatelessWidget {
             title: "消息",
             leading:  Icon(DYXIcons.news, color: DYXColors.navBar[100],),
             onPressed: () {
-              Navigator.pushNamed(context, DYXNewsPage.routeName);
+              userVM.isLogin ? Navigator.pushNamed(context, DYXNewsPage.routeName) :
+              Navigator.pushNamed(context, DYXLoginPage.routeName);
             }
           ),
-          userVM.dyxRole == DYXRole.student ? DYXSettingItem(
+          userVM.dyxRole == DYXRole.teacher || userVM.dyxRole == DYXRole.instructor ? DYXSettingItem(
               title: "发布通知",
               leading:  Icon(DYXIcons.notification, color: DYXColors.navBar[300],),
               onPressed: () {
                 Navigator.pushNamed(context, DYXNoticePage.routeName);
               }
           ):SizedBox(),
-          userVM.dyxRole == DYXRole.student ? DYXSettingItem(
+          userVM.dyxRole == DYXRole.teacher || userVM.dyxRole == DYXRole.instructor ? DYXSettingItem(
               title: "发布作业",
               leading:  Icon(DYXIcons.book, color: DYXColors.navBar[400],),
               onPressed: () {
                 Navigator.pushNamed(context, DYXWorkPage.routeName);
+              }
+          ):SizedBox(),
+          userVM.dyxRole == DYXRole.instructor ? DYXSettingItem(
+              title: "班级发布的通知",
+              leading:  Icon(DYXIcons.cloud, color: DYXColors.navBar[400],),
+              onPressed: () {
+                Navigator.pushNamed(context, DYXWorkLookPage.routeName);
               }
           ):SizedBox(),
           // DYXSettingItem(
