@@ -9,6 +9,7 @@ import 'package:student_management/core/model/regular/regular_search_model.dart'
 import 'package:student_management/core/services/regular/regular_search.dart';
 import 'package:student_management/core/services/regular_category/regular_category.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
+import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/personal/regular/regular_add/regular_add_record/regular_add_record.dart';
 
 /// 添加的界面
@@ -112,16 +113,21 @@ class _DYXRegularAddPageState extends State<DYXRegularAddPage> {
   }) => Container(
     decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(5.px))),
     margin: EdgeInsets.all(5.px),
-    child: GestureDetector(
-      child: ListTile(
-        title: Text(regularItem.title ?? "步行"),
-        subtitle: Text(regularItem.describe ?? "延年益寿之法宝", overflow: TextOverflow.ellipsis, maxLines: 1,),
+    child: Consumer<DYXUserViewModel>(
+      builder: (ctx, userVM, child)=>GestureDetector(
+        child: ListTile(
+          title: Text(regularItem.title ?? "步行"),
+          subtitle: Text(regularItem.describe ?? "延年益寿之法宝", overflow: TextOverflow.ellipsis, maxLines: 1,),
 //      trailing: DYXImageNetwork.avatarNetwork(url: imageUrl),
-        trailing: CircleAvatar(backgroundImage: NetworkImage(regularItem.image),),
+          trailing: CircleAvatar(backgroundImage: NetworkImage(regularItem.image),),
+        ),
+        onTap: () { // 点击
+          if (userVM.isLogin)
+            Navigator.pushNamed(context, DYXRegularAddRecordPage.routeName, arguments: regularItem);
+          else
+            Navigator.pushNamed(context, DYXLoginPage.routeName);
+        },
       ),
-      onTap: () { // 点击
-        Navigator.pushNamed(context, DYXRegularAddRecordPage.routeName, arguments: regularItem);
-      },
     ),
   );
 }

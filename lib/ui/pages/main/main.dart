@@ -5,6 +5,7 @@ import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management/core/services/work/work_search.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
+import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/main/main_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:student_management/ui/pages/personal/news/news.dart';
@@ -103,12 +104,17 @@ class _DYXMainScreenState extends State<DYXMainPage> {
         ),
 
 
-        floatingActionButton: FloatingActionButton(
-          tooltip: "添加",
-          child: Icon(DYXIcons.add),
-          onPressed: () {
-            Navigator.pushNamed(context, DYXRegularAddPage.routeName);
-          },
+        floatingActionButton: Consumer<DYXUserViewModel>(
+          builder: (ctx, userVM, child) => FloatingActionButton(
+            tooltip: "添加",
+            child: Icon(DYXIcons.add),
+            onPressed: () {
+              if (userVM.isLogin)
+                Navigator.pushNamed(context, DYXRegularAddPage.routeName);
+              else
+                Navigator.pushNamed(context, DYXLoginPage.routeName);
+            },
+          ),
         ),
         // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         // bottomNavigationBar: BottomNavigationBar(

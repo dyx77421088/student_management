@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_management/core/extension/int_extension.dart';
 import 'package:student_management/core/model/work/work_single.dart';
+import 'package:student_management/core/utils/date_time_utils.dart';
 import 'package:student_management/ui/pages/personal/single_work_look/single_work_look.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
 import 'package:student_management/ui/shared/toast/toast.dart';
@@ -22,43 +23,64 @@ class DYXWorkItem extends StatelessWidget {
     @required DYXWorkSingleModel regularItem,
     @required BuildContext context,
   }) => GestureDetector(
-    child: Card(
-      // decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(5.px))),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.px)),
-      // color: Colors.red,
-      elevation: 5.px,
-      child: Row(
+    child: Container(
+      margin: EdgeInsets.symmetric(vertical: 5.px, horizontal: 10.px),
+      child: Stack(
         children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-              height: 100.px,
-              width: 50.px,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  buildAvatarImg(regularItem.userDetails.avatar),
-                  // SizedBox(height: 1.px,),
-                  Text(regularItem.userDetails.name),
-                ],
-              ),
+
+          Card(
+            // decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(5.px))),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.px)),
+            // color: Colors.red,
+            elevation: 5.px,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      buildAvatarImg(regularItem.userDetails.avatar),
+                      SizedBox(height: 7.px,),
+                      Text(regularItem.userDetails.name),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 7,
+                  child: Container(
+                    margin: EdgeInsets.only(left: 20.px),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(regularItem.title),
+                        SizedBox(height: 20.px,),
+                        Text(regularItem.content, maxLines: 1, overflow: TextOverflow.ellipsis,),
+                      ],
+                    ),
+                  ),
+                ),
+
+              ],
+
             ),
           ),
-          Expanded(
-            flex: 6,
+          Positioned(
+            top: 15.px,
+            right: 10.px,
             child: Container(
-              margin: EdgeInsets.only(left: 20.px),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(regularItem.title),
-                  SizedBox(height: 20.px,),
-                  Text(regularItem.content, maxLines: 1, overflow: TextOverflow.ellipsis,),
-                ],
+              width: 100.px,
+              alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(vertical: 5.px, horizontal: 10.px),
+              decoration: BoxDecoration(
+                  color: Colors.black54,
+                  borderRadius: BorderRadius.circular(6.px)
               ),
+              child: Text(DYXDateTimeUtils.getNowDate(timeStamp:regularItem.releaseTime),
+                style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white),),
             ),
-          )
+          ),
         ],
       ),
     ),

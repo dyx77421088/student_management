@@ -8,6 +8,7 @@ import 'package:student_management/core/extension/int_extension.dart';
 import 'package:student_management/core/utils/date_time_utils.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/pages/personal/regular/regular_content_edit/regulaar_content_edit.dart';
+import 'package:student_management/ui/shared/blank_page/blank_page.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
 import 'package:student_management/ui/shared/refresh/easy_refresh/my_easy_refresh_model.dart';
 import 'package:student_management/ui/shared/shimmer/shimmer_utils.dart';
@@ -46,7 +47,9 @@ class _DYXRegularContentState extends State<DYXRegularContent> {
 
   Widget buildData() => Consumer<DYXUserViewModel>(
     builder: (ctx, userVM, child) => DYXEasyRefreshModel(
-      slivers: data == null ? [] : buildDataChildren(userVM),
+      slivers: !userVM.isLogin?
+          [SliverList(delegate: SliverChildListDelegate([DYXBlankPage(text: "请先登录",imageType: DYXBlankType.pkq,)]))]
+          : data == null ? [] : buildDataChildren(userVM),
       onRefresh: () async{
         index = 1;
         data = await DYXRegularAddRecordServices.search();
@@ -135,8 +138,8 @@ class _DYXRegularContentState extends State<DYXRegularContent> {
   List<Result> filterClass(List<Result> results) => results.where((element) =>
     element.regular.clazz!=null &&
     DYXDateTimeUtils.onTime(startTime: element.startTime, endTime: element.endTime) // 在这个时间段内
-    && DYXDateTimeUtils.floorTime(timeStamp: widget.now.second)
-        == DYXDateTimeUtils.floorTime(timeStamp: DateTime.now().second)
+    && DYXDateTimeUtils.getNowTimeStamp() > DYXDateTimeUtils.floorTime(timeStamp: widget.now.millisecondsSinceEpoch~/1000)
+    && DYXDateTimeUtils.getNowTimeStamp() < DYXDateTimeUtils.ceilTime(timeStamp: widget.now.millisecondsSinceEpoch~/1000)
   ).toList();
 
   /// 过滤，进行中的签到

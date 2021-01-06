@@ -47,7 +47,7 @@ class _DYXHomePageState extends State<DYXHomePage> {
 //       ),
       builder: (ctx, userVM, child) => userVM.isLogin?DYXRegularPage():Scaffold(
         appBar: AppBar(title: Text("请先登录"),),
-        body: DYXBlankPage(),
+        body: DYXBlankPage(text: "请先登录",),
       ),
     );
   }

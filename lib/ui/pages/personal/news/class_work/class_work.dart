@@ -90,7 +90,7 @@ class _DYXClassWorkPageState extends State<DYXClassWorkPage> {
       slivers: SliverGrid.count(
         crossAxisCount: 1,
         crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
+        mainAxisSpacing: 1,
         childAspectRatio: 3,
         children: t.map((e) => DYXWorkItem(regularItem: e)).toList(),
       ), title: "${course=="已结束"?"已结束，只展示3天内的":course}(${t.length})",

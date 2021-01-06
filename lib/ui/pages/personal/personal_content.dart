@@ -86,13 +86,13 @@ class DYXPersonalContent extends StatelessWidget {
               Navigator.pushNamed(context, DYXLoginPage.routeName);
             }
           ),
-          userVM.dyxRole == DYXRole.teacher || userVM.dyxRole == DYXRole.instructor ? DYXSettingItem(
-              title: "发布通知",
-              leading:  Icon(DYXIcons.notification, color: DYXColors.navBar[300],),
-              onPressed: () {
-                Navigator.pushNamed(context, DYXNoticePage.routeName);
-              }
-          ):SizedBox(),
+          // userVM.dyxRole == DYXRole.teacher || userVM.dyxRole == DYXRole.instructor ? DYXSettingItem(
+          //     title: "发布通知",
+          //     leading:  Icon(DYXIcons.notification, color: DYXColors.navBar[300],),
+          //     onPressed: () {
+          //       Navigator.pushNamed(context, DYXNoticePage.routeName);
+          //     }
+          // ):SizedBox(),
           userVM.dyxRole == DYXRole.teacher || userVM.dyxRole == DYXRole.instructor ? DYXSettingItem(
               title: "发布作业",
               leading:  Icon(DYXIcons.book, color: DYXColors.navBar[400],),

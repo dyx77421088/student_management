@@ -6,6 +6,7 @@ import 'package:student_management/core/services/regualr_clock/regular_clock.dar
 import 'package:student_management/core/services/regular_add_record/regular_add_record.dart';
 import 'package:student_management/core/utils/date_time_utils.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
+import 'package:student_management/ui/shared/blank_page/blank_page.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
 import 'package:student_management/ui/shared/refresh/easy_refresh/my_easy_refresh_model.dart';
 import 'package:student_management/ui/shared/shimmer/shimmer_utils.dart';
@@ -33,8 +34,17 @@ class _DYXRegularTargetState extends State<DYXRegularTarget> {
   }
 
   Widget buildData() => Consumer<DYXUserViewModel>(
-    builder: (ctx, userVM, child) => DYXEasyRefreshModel(
-      slivers: data == null ? [] : getData(userVM),
+    builder: (ctx, userVM, child) =>
+      !userVM.isLogin?DYXBlankPage(text: "请先登录",) :// 提示需要登录
+      buildDYXEasyRefresh(userVM),
+  );
+
+  /// 主体部分
+  Widget buildDYXEasyRefresh(DYXUserViewModel userVM) {
+    return DYXEasyRefreshModel(
+      slivers: data == null || data.results.length == 0 ? [
+        SliverList(delegate: SliverChildListDelegate([DYXBlankPage()]))
+      ] : getData(userVM),
       onRefresh: () async{
         if (!userVM.isLogin) return;
         index = 1;
@@ -53,10 +63,11 @@ class _DYXRegularTargetState extends State<DYXRegularTarget> {
         data.results.addAll(d.results);
         regularClockSearchModel.results.addAll(d2.results);
         setState(() {});
-      },
-    ),
+    },
   );
+  }
 
+  /// 获得数据
   List<Widget> getData(DYXUserViewModel userVM) {
     List<Widget> slivers = [];
     data.results.forEach((element) {
@@ -78,8 +89,10 @@ class _DYXRegularTargetState extends State<DYXRegularTarget> {
                 Padding(
                   padding: EdgeInsets.all(5.px),
                   child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.px)),
                     child: Container(
                       margin: EdgeInsets.all(5.px),
+                      padding: EdgeInsets.all(10.px),
                       child: Column(
                         children: [
                           buildRow("开始时间", element.startTimeStr),
