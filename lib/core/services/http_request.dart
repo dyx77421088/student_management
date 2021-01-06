@@ -37,8 +37,9 @@ class DYXHttpRequest {
       // 响应拦截
       onResponse: (response) {
         print('响应拦截');
+        if (!showSuccessMessage) return response;
         final message = response.data['message'];
-        if (message != null && showSuccessMessage) {
+        if (message != null) {
           if(response.data['code'] == 200 && showSuccessCode200Message || response.data['code'] != 200) {
             DYXToast.showToast(message);
           }

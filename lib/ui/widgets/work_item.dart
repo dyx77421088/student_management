@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:student_management/core/extension/int_extension.dart';
-import 'package:student_management/core/model/work/work_search.dart';
+import 'package:student_management/core/model/work/work_single.dart';
 import 'package:student_management/ui/pages/personal/single_work_look/single_work_look.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
-import 'package:student_management/ui/shared/size_fit.dart';
-
+import 'package:student_management/ui/shared/toast/toast.dart';
+typedef void DYXWorkItemFunction<T>(T str);
 class DYXWorkItem extends StatelessWidget {
-  final Result regularItem;
+  final DYXWorkSingleModel regularItem;
+  final bool canUpdate;
+  final DYXWorkItemFunction hui; // 回调
 
-  DYXWorkItem({this.regularItem});
+  DYXWorkItem({this.regularItem, this.canUpdate = false, this.hui});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class DYXWorkItem extends StatelessWidget {
 
   /// item
   Widget buildItem({
-    @required Result regularItem,
+    @required DYXWorkSingleModel regularItem,
     @required BuildContext context,
   }) => GestureDetector(
     child: Card(
@@ -61,7 +63,16 @@ class DYXWorkItem extends StatelessWidget {
       ),
     ),
     onTap: () {
-      Navigator.pushNamed(context, DYXSingleWorkLookPage.routeName, arguments: regularItem);
+      Navigator.pushNamed(context,
+          canUpdate? DYXSingleWorkLookPage.routeNameCanUpdate:DYXSingleWorkLookPage.routeName,
+          arguments: regularItem
+      ).then((value) { // 回调
+        if(value != null) {
+          print(value);
+          // DYXToast.showToast("删除了$value");
+          hui(value);
+        }
+      });
     },
   );
 

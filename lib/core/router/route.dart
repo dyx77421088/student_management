@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:student_management/core/model/work/work_single.dart';
 import 'package:student_management/ui/pages/login/login.dart';
 import 'package:student_management/ui/pages/personal/details/details.dart';
 import 'package:student_management/ui/pages/personal/details/widget/details_update_personal_signature.dart';
@@ -112,6 +113,12 @@ class DYXRouter {
             type: PageTransitionType.scale,
             alignment: Alignment.center
         );
+      case DYXWorkPage.routeNameUpdate: // 作业修改的效果
+        return PageTransition(
+            child: DYXWorkPage(work: settings.arguments as DYXWorkSingleModel,),
+            type: PageTransitionType.scale,
+            alignment: Alignment.center
+        );
       case DYXWorkLookPage.routeName: // 作业查看的效果
         return PageTransition(
             child: DYXWorkLookPage(),
@@ -120,7 +127,8 @@ class DYXRouter {
         );
       case DYXNewsPage.routeName: // 消息显示的效果
         return PageTransition(
-            child: DYXNewsPage(),
+            //暂时先显示工作的work
+            child: DYXClassWorkPage(),
             type: PageTransitionType.rightToLeft,
             alignment: Alignment.center
         );
@@ -150,7 +158,13 @@ class DYXRouter {
         );
       case DYXSingleWorkLookPage.routeName: // 单个work查看
         return PageTransition(
-            child: DYXSingleWorkLookPage(settings.arguments as work.Result),
+            child: DYXSingleWorkLookPage(settings.arguments as DYXWorkSingleModel, canUpdate: false,),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center
+        );
+      case DYXSingleWorkLookPage.routeNameCanUpdate: // 单个work查看, 并能修改
+        return PageTransition(
+            child: DYXSingleWorkLookPage(settings.arguments as DYXWorkSingleModel, canUpdate: true),
             type: PageTransitionType.rightToLeft,
             alignment: Alignment.center
         );

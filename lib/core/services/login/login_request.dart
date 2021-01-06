@@ -17,7 +17,7 @@ class DYXLoginRequest {
     bool showSuccessCode200Message= false
   }) async{
     return DYXHttpRequest().request(
-      "/user/check_phone_code",
+      "/user/checkPhoneCode",
       data: {"phone_number": phoneNumber, "code": code},
       method: "post",
       headers: {"token": token},

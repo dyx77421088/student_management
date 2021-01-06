@@ -31,17 +31,23 @@ class DYXRegularClockServices {
   /// 查询
   static Future<DYXRegularClockSearchModel> search({
     int regularAddRecordId, // 打卡项
-    int clockInTime // 时间戳
+    int clockInTime, // 时间戳
+    int index = 1
   }) async{
-    Map<String, dynamic> t = {};
+    Map<String, dynamic> t = {
+    };
     if (regularAddRecordId != null) t['regular_add_record'] = regularAddRecordId;
     if (clockInTime != null) t['clock_in_time'] = clockInTime;
 
     var data = await DYXHttpRequest().request(
       "/regularClock/search",
       data: FormData.fromMap(t),
+      params: {
+        "index":index
+      },
       headers: {"token": DYXUserViewModel.staticToken}
-    );
+    ).catchError((e)=>print("错误"));
+    if (data == null) return null;
     return DYXRegularClockSearchModel.fromJson(data);
   }
 }

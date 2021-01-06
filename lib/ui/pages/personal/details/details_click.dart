@@ -149,7 +149,7 @@ void clickBirthday(BuildContext context, DYXUserViewModel userVM) async{
     context: context,
     initialDate: DateTime.now(),
     firstDate: DateTime(1970),
-    lastDate: DateTime(2021),
+    lastDate: DateTime.now(),
   );
   // 修改生日
   if(result != null) {

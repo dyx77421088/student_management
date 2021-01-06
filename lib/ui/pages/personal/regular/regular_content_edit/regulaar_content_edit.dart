@@ -56,8 +56,10 @@ class _DYXRegularContentEditState extends State<DYXRegularContentEditPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("mood === = == == ");
+    print(widget.editSetting.clock?.mood);
     if (widget.editSetting.readOnly)
-      moodController.text = widget.editSetting.clock.mood;
+      moodController.text = widget.editSetting.clock?.mood??"";
     return Scaffold(
       appBar: AppBar(
         title: Text("打卡${widget.editSetting.readOnly?"(${isToDay()?"今日已签到":"查看"})":""}"),

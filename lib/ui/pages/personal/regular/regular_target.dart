@@ -11,6 +11,7 @@ import 'package:student_management/ui/shared/refresh/easy_refresh/my_easy_refres
 import 'package:student_management/ui/shared/shimmer/shimmer_utils.dart';
 import 'package:student_management/ui/shared/sliver_sticky_header/sliver_sticky_header.dart';
 import 'package:student_management/core/extension/int_extension.dart';
+import 'package:student_management/ui/shared/toast/toast.dart';
 
 class DYXRegularTarget extends StatefulWidget {
   @override
@@ -19,22 +20,40 @@ class DYXRegularTarget extends StatefulWidget {
 
 class _DYXRegularTargetState extends State<DYXRegularTarget> {
   DYXRegularAddRecordSearchModel data;
+  int index=  1;
   /// 打卡查询
   RegularClock.DYXRegularClockSearchModel regularClockSearchModel;
   @override
   Widget build(BuildContext context) {
-    return buildData();
+    print("记载！！！！！！！");
+    return Scaffold(
+      appBar: AppBar(title: Text("目标"),),
+      body: buildData(),
+    );
   }
 
   Widget buildData() => Consumer<DYXUserViewModel>(
     builder: (ctx, userVM, child) => DYXEasyRefreshModel(
       slivers: data == null ? [] : getData(userVM),
       onRefresh: () async{
+        if (!userVM.isLogin) return;
+        index = 1;
         data = await DYXRegularAddRecordServices.search();
         regularClockSearchModel = await DYXRegularClockServices.search();
         setState(() {});
       },
-      // onLoad: ()async{},
+      onLoad: ()async{
+        ++index;
+        var d = await DYXRegularAddRecordServices.search(index: index);
+        var d2 = await DYXRegularClockServices.search(index: index);
+        if (d == null || d2 == null) {
+          DYXToast.showToast("没有更多了");
+          return ;
+        }
+        data.results.addAll(d.results);
+        regularClockSearchModel.results.addAll(d2.results);
+        setState(() {});
+      },
     ),
   );
 

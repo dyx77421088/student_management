@@ -1,9 +1,12 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:student_management/core/utils/date_time_utils.dart';
 import 'package:student_management/ui/shared/date_picker/date_picker_utils.dart';
+import 'package:student_management/ui/shared/dialog/dialog.dart';
 import 'package:student_management/ui/shared/icon/icons.dart';
-import 'package:student_management/ui/widgets/my_text_form_field.dart';
 import 'package:student_management/core/extension/int_extension.dart';
+import 'package:student_management/ui/widgets/select_class.dart';
+import 'package:student_management/ui/pages/personal/work/work.dart';
 
 class DYXWorkContent extends StatefulWidget {
   final TextEditingController titleController;
@@ -19,13 +22,28 @@ class DYXWorkContent extends StatefulWidget {
 class _DYXWorkContentState extends State<DYXWorkContent> {
   DateTime startDate, startTime, endDate, endTime;
   DYXCourse _course = DYXCourse.yuwen;
+  List<DYXItem> list = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // list = widget.d['check'] ?? [];
+    startDate = widget.d['startDate'];
+    startTime = widget.d['startTime'];
+    endDate = widget.d['endDate'];
+    endTime = widget.d['endTime'];
+    _course = widget.d['course']??DYXCourse.yuwen;
+  }
 
   @override
   Widget build(BuildContext context) {
+    list = widget.d['check'] ?? [];
     return Column(
       children: [
         buildTitle(),
         buildContent(),
+        buildSelectedClass(),
+        buildSelectClass(),
         SizedBox(height: 10.px,),
         Row(children: [
             buildDate(context, true, DYXTimeStatus.startDate),
@@ -44,6 +62,41 @@ class _DYXWorkContentState extends State<DYXWorkContent> {
       ],
     );
   }
+  // 选择了的班级
+  Widget buildSelectedClass() {
+    bool b = true;
+    String str = "";
+    list.forEach((a)  {
+      if (a.check) {
+        b = false;
+        str += '${a.text},';
+      }
+    });
+    if (b) return Text("暂无选择班级");
+    return Text(str.substring(0, str.length - 1));
+  }
+  /// 选择班级
+  Widget buildSelectClass() {
+    return RaisedButton(onPressed: (){
+      clickSex(context);
+    }, child: Text("选择班级"),);
+  }
+  /// 用户详情中单击用户名后的监听
+  void clickSex(BuildContext context) {
+
+
+    DYXDialog.showDialog(
+      context: context,
+      body: DYXSelectClass(list),
+      dialogType: DialogType.NO_HEADER,
+      btnCancelOnPress: (){},
+      btnOkOnPress: (){
+        list.forEach((a)=>print(a.check));
+        setState(() {});
+      },
+    );
+  }
+
 
   /// 添加
   Widget buildAdd() {

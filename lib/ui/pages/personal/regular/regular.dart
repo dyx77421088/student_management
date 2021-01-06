@@ -29,39 +29,33 @@ class _DYXRegularPageState extends State<DYXRegularPage> {
           })
         ],
       ),
-      body: IndexedStack(
-        index: _index,
-        children: [
-          DYXRegularContent(now),
-          DYXRegularTarget(),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: "添加",
-        child: Icon(DYXIcons.add),
-        onPressed: () {
-          Navigator.pushNamed(context, DYXRegularAddPage.routeName);
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _index,
-        items: [
-          BottomNavigationBarItem(
-            label: '打卡',
-            icon: Icon(DYXIcons.calendar),
-          ),
-          BottomNavigationBarItem(
-            label: '目标任务',
-            icon: Icon(DYXIcons.target)
-          )
-        ],
-        onTap: (index) {
-          setState(() {
-            _index = index;
-          });
-        },
-      ),
+      body: DYXRegularContent(now),
+      // floatingActionButton: FloatingActionButton(
+      //   tooltip: "添加",
+      //   child: Icon(DYXIcons.add),
+      //   onPressed: () {
+      //     Navigator.pushNamed(context, DYXRegularAddPage.routeName);
+      //   },
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: _index,
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       label: '打卡',
+      //       icon: Icon(DYXIcons.calendar),
+      //     ),
+      //     BottomNavigationBarItem(
+      //       label: '目标任务',
+      //       icon: Icon(DYXIcons.target)
+      //     )
+      //   ],
+      //   onTap: (index) {
+      //     setState(() {
+      //       _index = index;
+      //     });
+      //   },
+      // ),
     );
   }
 

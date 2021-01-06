@@ -37,10 +37,12 @@ class DYXRegularAddRecordServices {
 
   static Future<DYXRegularAddRecordSearchModel> search({
     int userId,
-    int regular
+    int regular,
+    int index = 1
   }) async{
     // 传数据
-    var data = {};
+    var data = {
+    };
     if (userId != null) {
       data['user'] = userId;
     }
@@ -50,9 +52,13 @@ class DYXRegularAddRecordServices {
     var d = await DYXHttpRequest().request(
         "/regularAddRecord/search",
         headers: {"token": DYXUserViewModel.staticToken},
-        data: data
-    );
+        data: data,
+        params: {
+          "index":index
+        },
+    ).catchError((e)=>print("错误了"));
     print("我是$d");
+    if (d == null) return null;
     return DYXRegularAddRecordSearchModel.fromJson(d);
   }
 }

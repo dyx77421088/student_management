@@ -6,10 +6,10 @@ import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/shared/toast/toast.dart';
 
 import '../http_request.dart';
-
+/// 修改work
 class DYXWorkUpdate {
   /// 查看作业
-  static Future<DYXWorkSearchModel> search({
+  static Future<DYXWorkSearchModel> update({
     @required int id,
     String course, // 作业课程科目
     String title , // 作业标题

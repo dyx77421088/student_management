@@ -121,6 +121,7 @@ void selectTime(DYXTimeStatus status) {
       initialDateTime: this.reminderTime,
       dateFormat: "HH时-mm分",
       onConfirm: (DateTime dateTime, List<int> selectedIndex) {
+        print(selectedIndex);
         setState(() {
           switch(status) {
             case DYXTimeStatus.START_TIME:

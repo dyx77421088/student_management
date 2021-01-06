@@ -30,6 +30,7 @@ class DYXRegularContent extends StatefulWidget {
 }
 
 class _DYXRegularContentState extends State<DYXRegularContent> {
+  int index = 1;
   DYXRegularAddRecordSearchModel data;
   /// 打卡查询
   RegularClock.DYXRegularClockSearchModel regularClockSearchModel;
@@ -47,11 +48,23 @@ class _DYXRegularContentState extends State<DYXRegularContent> {
     builder: (ctx, userVM, child) => DYXEasyRefreshModel(
       slivers: data == null ? [] : buildDataChildren(userVM),
       onRefresh: () async{
+        index = 1;
         data = await DYXRegularAddRecordServices.search();
         regularClockSearchModel = await DYXRegularClockServices.search();
         setState(() {});
       },
-      // onLoad: ()async{},
+      onLoad: ()async{
+        ++index;
+        var d = await DYXRegularAddRecordServices.search(index: index);
+        var d2 = await DYXRegularClockServices.search(index: index);
+        if (d == null || d2 == null) {
+          DYXToast.showToast("没有更多了");
+          return ;
+        }
+        data.results.addAll(d.results);
+        regularClockSearchModel.results.addAll(d2.results);
+        setState(() {});
+      },
     ),
   );
 
@@ -122,6 +135,8 @@ class _DYXRegularContentState extends State<DYXRegularContent> {
   List<Result> filterClass(List<Result> results) => results.where((element) =>
     element.regular.clazz!=null &&
     DYXDateTimeUtils.onTime(startTime: element.startTime, endTime: element.endTime) // 在这个时间段内
+    && DYXDateTimeUtils.floorTime(timeStamp: widget.now.second)
+        == DYXDateTimeUtils.floorTime(timeStamp: DateTime.now().second)
   ).toList();
 
   /// 过滤，进行中的签到

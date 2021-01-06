@@ -44,7 +44,7 @@ class DYXPersonalContent extends StatelessWidget {
               }
           ),
           SizedBox(height: 10.px,),
-          DYXSettingItem(
+          userVM.dyxRole != DYXRole.student ? SizedBox() : DYXSettingItem(
               title: "课表",
               leading:  Icon(DYXIcons.calendar, color: DYXColors.navBar[50],),
               onPressed: () {
@@ -67,16 +67,16 @@ class DYXPersonalContent extends StatelessWidget {
           //     leading:  Icon(DYXIcons.exam, color: DYXColors.navBar[700],),
           //     onPressed: () {}
           // ),
-          DYXSettingItem(
-              title: "打卡",
-              leading:  Icon(DYXIcons.fingerprint, color: DYXColors.navBar[700],),
-              onPressed: () {
-                if(DYXUserViewModel.staticToken != null)
-                  Navigator.pushNamed(context, DYXRegularPage.routeName);
-                else
-                  Navigator.pushNamed(context, DYXLoginPage.routeName);
-              }
-          ),
+          // DYXSettingItem(
+          //     title: "打卡",
+          //     leading:  Icon(DYXIcons.fingerprint, color: DYXColors.navBar[700],),
+          //     onPressed: () {
+          //       if(DYXUserViewModel.staticToken != null)
+          //         Navigator.pushNamed(context, DYXRegularPage.routeName);
+          //       else
+          //         Navigator.pushNamed(context, DYXLoginPage.routeName);
+          //     }
+          // ),
           SizedBox(height: 10.px),
           DYXSettingItem(
             title: "消息",

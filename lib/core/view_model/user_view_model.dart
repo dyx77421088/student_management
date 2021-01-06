@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:date_format/date_format.dart';
 import 'package:dio/dio.dart';
@@ -12,6 +13,7 @@ import 'package:student_management/core/model/user/user_teacher_login_model.dart
 import 'package:student_management/core/model/user/user_parent_login_model.dart' as Parent;
 import 'package:student_management/core/services/config.dart';
 import 'package:student_management/core/services/login/user_request.dart';
+import 'package:student_management/core/services/work/work_search.dart';
 import 'package:student_management/core/utils/date_time_utils.dart';
 import 'package:student_management/ui/shared/notifications/awesome_notifications_utils.dart';
 import 'package:student_management/ui/shared/toast/toast.dart';
@@ -30,6 +32,7 @@ enum DYXRole {
 class DYXUserViewModel extends ChangeNotifier {
   static String staticToken;
   static int teacherId;
+  static bool jiazai = false; // 加载完成了吗
 
   // WebSocket
   static IOWebSocketChannel _notificationChannel;
@@ -53,7 +56,7 @@ class DYXUserViewModel extends ChangeNotifier {
       print(prefs.getString("token") == null);
       // 尝试登录
       if (prefs.getString("token") != null) {
-        initWebSocket(prefs.getString("token"));
+
         // 发送请求
         DYXUserRequest.onToken(prefs.getString("token"), inter: InterceptorsWrapper(onError: (err) {
 //            遇到错误，登出
@@ -73,11 +76,18 @@ class DYXUserViewModel extends ChangeNotifier {
       // 通知
       _notificationChannel = IOWebSocketChannel.connect('ws://${HttpConfig.IP}:${HttpConfig.port}/ws/notice/$token')
         ..stream.forEach((e) {
-          print(e);
-          DYXToast.showToast(e);
-          DYXAwesomeNotificationsUtils.sendNotifications(id: 1, title:"收到班级作业", body: "hhhhh");
+          sendMessage(json.decode(e));
         });
     }
+  }
+
+  static void sendMessage(e) async{
+    var data = await DYXWorkSearch.searchBySingle(id: e['work']);
+    DYXAwesomeNotificationsUtils.sendNotifications(
+      id: data.id,
+      title:data.title,
+      body: data.content,
+    );
   }
 
   Future<bool> init() async {
@@ -95,6 +105,7 @@ class DYXUserViewModel extends ChangeNotifier {
   /// 保存信息
   void _saveInfo(DYXUserLoginModel user) async {
     SharedPreferences prefs = await _prefs;
+
     if (user is Student.DYXUserStudentLoginModel) {
       // 登录的是学生用户
       _saveData(prefs, user.data);
@@ -110,6 +121,11 @@ class DYXUserViewModel extends ChangeNotifier {
     }
 
     prefs.setBool("isLogin", true);
+
+    /// 建立连接
+    initWebSocket(prefs.getString("token"));
+
+    jiazai = true;
     notifyListeners();
   }
 
@@ -255,7 +271,7 @@ class DYXUserViewModel extends ChangeNotifier {
   String get personalSignature => isLogin ? prefs.getString("personalSignature") : null;
 
   /// 是否登录
-  bool get isLogin => prefs == null ? false : prefs.getBool("isLogin");
+  bool get isLogin => prefs == null ? false : (prefs.getBool("isLogin") && jiazai);
 
   ///
   /// 设置

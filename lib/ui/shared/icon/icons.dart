@@ -102,5 +102,6 @@ class DYXIcons {
 ///  line_icons包下的
   static const user = LineIcons.user;
 
-
+  /// 笔
+  // static const pencil1 = FontAwesome.pencil_square_o;
 }

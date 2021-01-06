@@ -9,7 +9,7 @@ class DYXDateTimeUtils {
 
   /// 时间戳（秒）转换成时间
   static String timeStampToStr(int timeStamp) {
-    return timeStampFormatToStr(timeStamp, [yyyy, '-', mm, '-', dd, ' ', HH, ':', mm, ':', ss]);
+    return timeStampFormatToStr(timeStamp, [yyyy, '-', mm, '-', dd, ' ', HH, ':', nn, ':', ss]);
   }
 
   /// 获得当前的时间戳(秒)
@@ -24,7 +24,7 @@ class DYXDateTimeUtils {
 
   /// 获得当前的时间
   static String getNowTime({int timeStamp}) {
-    return timeStampFormatToStr(timeStamp??getNowTimeStamp(), [HH, ':', mm]);
+    return timeStampFormatToStr(timeStamp??getNowTimeStamp(), [HH, ':', nn]);
   }
   
   /// dateTime 转换成字符串（日期）
@@ -38,7 +38,7 @@ class DYXDateTimeUtils {
   /// dateTime 转换成字符串 （时间）
   static String dateTimeToTimeStr(
       DateTime dateTime, 
-      {List<String> format = const [HH, ':', mm]}
+      {List<String> format = const [HH, ':', nn]}
     ) {
     return formatDate(dateTime, format);
   }
@@ -92,7 +92,11 @@ class DYXDateTimeUtils {
   static String dateTimeToDate({@required int timeStamp}) {
     return timeStampFormatToStr(
       timeStamp,
-      [yyyy, '年', mm, '月', dd, '日 ', HH, '时', mm, '分']
+      [yyyy, '年', mm, '月', dd, '日 ', HH, '时', nn, '分']
     );
   }
+
+  /// 时间戳转换成dateTime类型（秒）
+  static DateTime timeStampToDateTime({@required int timeStamp}) =>
+      DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
 }

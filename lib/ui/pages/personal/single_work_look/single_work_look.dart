@@ -1,25 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:student_management/core/model/work/work_search.dart' as work;
+import 'package:popup_menu/popup_menu.dart';
 import 'package:student_management/core/extension/int_extension.dart';
+import 'package:student_management/core/model/work/work_single.dart';
+import 'package:student_management/core/services/work/work_delete.dart';
 import 'package:student_management/core/utils/date_time_utils.dart';
+import 'package:student_management/ui/shared/icon/icons.dart';
 import 'package:student_management/ui/shared/image/image_network.dart';
+import 'package:student_management/ui/shared/toast/toast.dart';
+import 'package:student_management/ui/pages/personal/work/work.dart';
 
 class DYXSingleWorkLookPage extends StatefulWidget {
   static const String routeName = "/DYXSingleWorkLookPage";
-  final work.Result result;
+  static const String routeNameCanUpdate = "/DYXSingleWorkLookPage2";
+  final DYXWorkSingleModel result;
+  // 是否能够编辑
+  final bool canUpdate;
 
 
-  DYXSingleWorkLookPage(this.result);
+  DYXSingleWorkLookPage(this.result,{this.canUpdate = true});
 
   @override
   _DYXSingleWorkLookPageState createState() => _DYXSingleWorkLookPageState();
 }
 
 class _DYXSingleWorkLookPageState extends State<DYXSingleWorkLookPage> {
+  var penKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.result.title),),
+      appBar: AppBar(title: Text(widget.result.title), actions: [
+        widget.canUpdate ? IconButton(
+          key: penKey,
+          icon: Icon(DYXIcons.settings),
+          onPressed: penClick
+        ) : Text("")
+      ],),
       body: Column(
           children: [
             buildMakeTitle(context, "发布老师"),
@@ -50,6 +65,31 @@ class _DYXSingleWorkLookPageState extends State<DYXSingleWorkLookPage> {
           ],
       ),
     );
+  }
+  /// 点击笔之后的执行的
+  void penClick() {
+    PopupMenu(
+      context: context,
+      maxColumn: 1,
+      items: [
+        MenuItem(title: '删除', image: Icon(Icons.delete, color: Colors.white,)),
+        // MenuItem(title: '编辑', image: Icon(Icons.delete, color: Colors.white,)),
+      ],
+      onClickMenu: (MenuItemProvider item) {
+        if(item.menuTitle == "删除") {
+          del();
+        } else if(item.menuTitle == "编辑") {
+          Navigator.pushNamed(context, DYXWorkPage.routeNameUpdate, arguments: widget.result);
+        }
+      },
+    )..show(widgetKey: penKey);
+  }
+
+  /// 删除
+  void del() async{
+    await DYXWorkDelete.del(id: widget.result.id);
+    DYXToast.showToast("删除成功");
+    Navigator.pop<dynamic>(context, widget.result.id);
   }
 
   /// 标题

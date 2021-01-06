@@ -1,12 +1,21 @@
+import 'dart:math';
+
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter_inner_drawer/inner_drawer.dart';
 import 'package:provider/provider.dart';
+import 'package:student_management/core/services/work/work_search.dart';
 import 'package:student_management/core/view_model/user_view_model.dart';
 import 'package:student_management/ui/pages/main/main_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:student_management/ui/pages/personal/news/news.dart';
+import 'package:student_management/ui/pages/personal/regular/regular_add/regular_add.dart';
+import 'package:student_management/ui/pages/personal/regular/regular_target.dart';
+import 'package:student_management/ui/pages/personal/single_work_look/single_work_look.dart';
+import 'package:student_management/ui/shared/icon/icons.dart';
 import 'package:student_management/ui/shared/inner_drawer/inner_drawer_utils.dart';
 import 'package:student_management/ui/shared/nav_bar/nav_bar.dart';
 import 'package:student_management/ui/shared/theme/my_colors.dart';
+import 'package:student_management/ui/shared/toast/toast.dart';
 import 'initialize_items.dart';
 import 'package:student_management/ui/pages/home/home.dart';
 import 'package:student_management/ui/pages/page1/page1.dart';
@@ -28,17 +37,30 @@ class _DYXMainScreenState extends State<DYXMainPage> {
   @override
   void initState() {
     super.initState();
+
+
+    // 监听
+    AwesomeNotifications().actionStream.listen(
+            (receivedNotification) async{
+          // print("111111111111111111111111");
+          // print(receivedNotification.id);
+          // DYXToast.showToast("你点击了${receivedNotification.id}");
+          var data = await DYXWorkSearch.searchBySingle(id: receivedNotification.id);
+          Navigator.pushNamed(context, DYXSingleWorkLookPage.routeName, arguments: data);
+        }
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     pages = [
       DYXHomePage(_innerDrawerKey),
+      DYXRegularTarget(),
       // DYXNewsPage(),
       // DYXPage1(),
       // DYXPage2(),
       DYXPersonalPage(),
     ];
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return DYXInnerDrawerUtils.buildInnerDrawer(
       context,
       key: _innerDrawerKey,
@@ -79,6 +101,41 @@ class _DYXMainScreenState extends State<DYXMainPage> {
             },
           ),
         ),
+
+
+        floatingActionButton: FloatingActionButton(
+          tooltip: "添加",
+          child: Icon(DYXIcons.add),
+          onPressed: () {
+            Navigator.pushNamed(context, DYXRegularAddPage.routeName);
+          },
+        ),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        // bottomNavigationBar: BottomNavigationBar(
+        //   currentIndex: _index,
+        //   items: [
+        //     BottomNavigationBarItem(
+        //       label: '打卡',
+        //       icon: Icon(DYXIcons.calendar),
+        //     ),
+        //     BottomNavigationBarItem(
+        //       label: '目标任务',
+        //       icon: Icon(DYXIcons.target)
+        //     )
+        //   ],
+        //   onTap: (index) {
+        //     setState(() {
+        //       _index = index;
+        //     });
+        //   },
+        // ),
+
+
+
+
+
+
+
       ),
       leftChild: DYXMainDrawer(),
       // rightChild: Column(

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:student_management/ui/shared/theme/my_colors.dart';
@@ -16,8 +18,8 @@ class DYXAwesomeNotificationsUtils {
           NotificationChannel(
             icon: "resource://drawable/app_icon",
             channelKey: DYXChannelKey.basicChannel,
-            channelName: '我是基本通知',
-            channelDescription: '基本测试通知通道',
+            // channelName: '我是基本通知',
+            // channelDescription: '基本测试通知通道',
             defaultColor: DYXColors.blue,
             soundSource: 'resource://raw/notifications1',
             ledColor: Colors.white,
@@ -26,12 +28,12 @@ class DYXAwesomeNotificationsUtils {
           NotificationChannel(
             icon: "resource://drawable/schedule_icon",
             channelKey: DYXChannelKey.clock,
-            channelName: '我是闹钟',
-            channelDescription: '闹钟测试通知通道',
+            // channelName: '我是闹钟',
+            // channelDescription: '闹钟测试通知通道',
             defaultColor: DYXColors.blue,
             soundSource: 'resource://raw/notifications2',
-            ledColor: Colors.white,
-            vibrationPattern: lowVibrationPattern
+            ledColor: Colors.red,
+            vibrationPattern: Int64List.fromList([0, 2000, 200, 200, 2000, 200])
           ),
         ]
     );
@@ -45,10 +47,12 @@ class DYXAwesomeNotificationsUtils {
       } else {
         AwesomeNotifications().createNotification(
             content: NotificationContent(
-                id: id,
-                channelKey: DYXChannelKey.clock,
-                title: title ?? '基本通知',
-                body: body ?? '这是主题'
+              id: id,
+              channelKey: DYXChannelKey.clock,
+              title: title ?? '基本通知',
+              body: body ?? '这是主题',
+              // bigPicture: "https://tecnoblog.net/wp-content/uploads/2019/09/emoji.jpg",
+              // notificationLayout: NotificationLayout.BigPicture,
             )
         );
       }

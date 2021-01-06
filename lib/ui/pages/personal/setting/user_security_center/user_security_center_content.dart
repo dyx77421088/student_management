@@ -72,7 +72,7 @@ class _DYXUserSecurityCenterContentState extends State<DYXUserSecurityCenterCont
   num getScore(DYXUserViewModel userVM) {
     num a = 25; // 密码得分
     a += userVM.qq != null ? 25 : 0;
-    a += userVM.email != null ? 25 : 0;
+    a += getEmail(userVM.email) != null ? 25 : 0;
     a += userVM.phoneNumber != null ? 25 : 0;
     return a;
   }
@@ -108,17 +108,18 @@ class _DYXUserSecurityCenterContentState extends State<DYXUserSecurityCenterCont
   Widget buildUpdateEmail(DYXUserViewModel userVM) {
     return DYXUserSecurityCenterItem(
       title: Text('绑定email'),
-      subtitle: Text(userVM.email != null ? getEmail(userVM.email) : "未绑定email"),
-      leadingType: userVM.email != null ? DYXUserSecurityCenterItemLeadingType.checkOk : DYXUserSecurityCenterItemLeadingType.warning,
+      subtitle: Text(userVM.email != null ? getEmail(userVM.email)??"未绑定email" : "未绑定email"),
+      leadingType: getEmail(userVM.email) != null ? DYXUserSecurityCenterItemLeadingType.checkOk : DYXUserSecurityCenterItemLeadingType.warning,
       onTap: (){
         // 如果为空则可以修改
-        if(userVM.email == null) {
+        if(getEmail(userVM.email) == null) {
           setState(() {
             index = 2;
           });
+          _innerDrawerKey.currentState.open();
         }
       },
-      showTrailing: userVM.email == null,
+      showTrailing: getEmail(userVM.email) == null,
     );
   }
 
@@ -142,7 +143,7 @@ class _DYXUserSecurityCenterContentState extends State<DYXUserSecurityCenterCont
   }
 
   String getEmail(String email) {
-    if(email.lastIndexOf("@") == -1) return "????";
+    if(email.lastIndexOf("@") == -1) return null;
     return email.replaceRange(3, email.lastIndexOf("@"), "****");
   }
 
@@ -154,7 +155,7 @@ class _DYXUserSecurityCenterContentState extends State<DYXUserSecurityCenterCont
       case 1: // 修改密码
         return DYXUpdatePasswordByOldPassword(_innerDrawerKey);
       case 2: // 绑定email
-        return DYXUpdatePasswordByOldPassword(_innerDrawerKey);
+        return DYXUserSecurityCenterUpdateEmail(_innerDrawerKey);
       case 3: // 绑定手机号的验证
         if(userVM.phoneNumber != null) { // 先验证手机
           return DYXPhoneVerification(() {
