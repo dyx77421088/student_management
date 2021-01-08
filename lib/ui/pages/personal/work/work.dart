@@ -100,10 +100,10 @@ class _DYXWorkPageState extends State<DYXWorkPage> {
   void insertWork(BuildContext context) {
     int t1 = DYXDateTimeUtils.dateTimeToTimeStamp(date: d['startDate'], time: d['startTime']);
     int t2 = DYXDateTimeUtils.dateTimeToTimeStamp(date: d['endDate'], time: d['endTime']);
-    if (t1 < DYXDateTimeUtils.getNowTimeStamp()) {
-      DYXToast.showToast("开始时间不能早于当前时间");
-      return;
-    }
+    // if (t1 < DYXDateTimeUtils.getNowTimeStamp()) {
+    //   DYXToast.showToast("开始时间不能早于当前时间");
+    //   return;
+    // }
     bool isCheck = false;
     list.forEach((element) async{
       if (!element.check) return; // 没有勾选

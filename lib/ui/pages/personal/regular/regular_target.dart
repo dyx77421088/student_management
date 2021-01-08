@@ -73,6 +73,7 @@ class _DYXRegularTargetState extends State<DYXRegularTarget> {
     data.results.forEach((element) {
       if(element.regular == null) return;
       slivers.add(DYXSliverStickyHeader(
+          isOpen: true,
           title: element.regular?.title,
           titleWidget: Row(
             children: [

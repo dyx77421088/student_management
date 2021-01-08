@@ -18,7 +18,7 @@ class DYXUserUpdate {
       "phone_number": phoneNumber
     });
     return DYXHttpRequest().request(
-      "/user/update_phone",
+      "/user/updatePhone",
       method: "patch",
       headers: {"token": token},
       data: formData,
